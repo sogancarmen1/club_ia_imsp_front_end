@@ -8,7 +8,7 @@ export default function DefaultLayout({
   token,
 }: {
   children: React.ReactNode;
-  token: string | null;
+  token?: string | null;
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (

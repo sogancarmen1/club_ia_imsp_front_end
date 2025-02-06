@@ -7,7 +7,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { cookies } from "next/headers";
 
-const DropdownUser = ({ token }: { token: string | null }) => {
+const DropdownUser = ({ token }: { token?: string | null }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const route = useRouter();
 
