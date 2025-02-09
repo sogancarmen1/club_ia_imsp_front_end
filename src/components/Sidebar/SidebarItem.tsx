@@ -2,9 +2,13 @@ import React from "react";
 import Link from "next/link";
 import SidebarDropdown from "@/components/Sidebar/SidebarDropdown";
 import { usePathname } from "next/navigation";
+import { useDashboard } from "@/app/context/dashboardContext";
 
 const SidebarItem = ({ item, pageName, setPageName }: any) => {
+  const { setIsAllowed } = useDashboard();
+
   const handleClick = () => {
+    // setIsAllowed(false)
     const updatedPageName =
       pageName !== item.label.toLowerCase() ? item.label.toLowerCase() : "";
     return setPageName(updatedPageName);

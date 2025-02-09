@@ -59,7 +59,7 @@ const SelectGroupTwo: React.FC = () => {
           }`}
         >
           <option value="" disabled className="text-body dark:text-bodydark">
-            Select Type
+            Selectionner le type (Article/Projet)
           </option>
           <option value="article" className="text-body dark:text-bodydark">
             Article

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
@@ -8,6 +8,15 @@ import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { useDashboard } from "@/app/context/dashboardContext";
+import { jwtDecode, JwtPayload } from "jwt-decode";
+import Cookies from "js-cookie";
+import { toast } from "react-toastify";
+
+interface CustomJwtPayload extends JwtPayload {
+  _id: string;
+  role: string;
+}
 
 export function Login() {}
 
@@ -21,11 +30,12 @@ const SignIn: React.FC = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const route = useRouter();
+  const { setToken, token } = useDashboard();
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-
+    let response: any;
     try {
-      const response = await axios.post(
+      response = await axios.post(
         "http://localhost:4000/auth/login",
         {
           email: email,
@@ -35,11 +45,13 @@ const SignIn: React.FC = () => {
           withCredentials: true,
         },
       );
-
-      if (response.data.sucess) {
+      if (response.data.sucess == true) {
         route.push("/admin");
+        toast.success(response.data.message);
       }
-    } catch (error) {}
+    } catch (err: any) {
+      toast.error(err.response.data.message);
+    }
   };
 
   return (

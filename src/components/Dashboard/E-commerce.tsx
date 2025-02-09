@@ -83,10 +83,14 @@ const ECommerce: React.FC = () => {
 
   return (
     <>
+      {/* <p>What {totalSubscriber}</p> */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
         <CardDataStats
           title="Nombre total de projets"
-          total={totalProjects !== null ? totalProjects : "Chargement..."}
+          total={
+            totalProjects !== null ? totalProjects.toString() : "Chargement..."
+          }
+          rate=""
         >
           <svg
             className="fill-primary dark:fill-white"
@@ -108,7 +112,10 @@ const ECommerce: React.FC = () => {
         </CardDataStats>
         <CardDataStats
           title="Nombre total d'articles"
-          total={totalArticles !== null ? totalArticles : "Chargement..."}
+          total={
+            totalArticles !== null ? totalArticles.toString() : "Chargement..."
+          }
+          rate=""
         >
           <svg
             className="fill-primary dark:fill-white"
@@ -134,7 +141,10 @@ const ECommerce: React.FC = () => {
         </CardDataStats>
         <CardDataStats
           title="Nombre total de medias"
-          total={totalMedias !== null ? totalMedias : "Chargement..."}
+          total={
+            totalMedias !== null ? totalMedias.toString() : "Chargement..."
+          }
+          rate=""
         >
           <svg
             className="fill-primary dark:fill-white"
@@ -156,7 +166,12 @@ const ECommerce: React.FC = () => {
         </CardDataStats>
         <CardDataStats
           title="Nombre d'abonnement"
-          total={totalSubscriber !== null ? totalSubscriber : "Chargement..."}
+          total={
+            totalSubscriber !== null
+              ? totalSubscriber?.toString()
+              : "Chargement..."
+          }
+          rate=""
         >
           <svg
             className="fill-primary dark:fill-white"
@@ -182,7 +197,7 @@ const ECommerce: React.FC = () => {
         </CardDataStats>
       </div>
       <div className="mt-4">
-        <div>
+        <div >
           <TableThree />
         </div>
         <div className="py-8">

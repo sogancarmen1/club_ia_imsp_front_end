@@ -3,6 +3,8 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { cookies } from "next/headers";
+import Cookies from "js-cookie";
+import { getDecodedToken } from "@/utils/auth";
 
 interface DashboardContextProps {
   totalSubscriber: number | null;
@@ -12,6 +14,14 @@ interface DashboardContextProps {
   allEditor: any | null;
   articles: any | null;
   projects: any | null;
+  data: any;
+  isAllowed: boolean;
+  setData: (value: any) => void;
+  setIsAllowed: (value: any) => void;
+  role: string;
+  setRole: (value: any) => void;
+  token: any | null;
+  setToken: (value: any) => void;
 }
 
 const DashboardContext = createContext<DashboardContextProps | undefined>(
@@ -30,21 +40,28 @@ export const DashboardProvider = ({
   const [totalMedias, setTotalMedias] = useState<number | null>(null);
   const [articles, setArticleData] = useState<any | null>(null);
   const [projects, setProjectData] = useState<any | null>(null);
+  const [data, setData] = useState<any>(null);
+  const [isAllowed, setIsAllowed] = useState<boolean>(false);
+  const [role, setRole] = useState<string>("");
+  const [token, setToken] = useState<any | null>(null);
+
+  useEffect(() => {
+    const decodedToken = getDecodedToken();
+    if (decodedToken) {
+      setToken(decodedToken);
+      setRole(decodedToken.role);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const allEditors = await axios.get(
-          "http://localhost:4000/user/editor",
-          { withCredentials: true },
-        );
-        setEditorData(allEditors.data.data);
-
         const responseSubscriber = await axios.get(
           "http://localhost:4000/user",
           { withCredentials: true },
         );
-        setTotalSubscriber(responseSubscriber.data.data.length);
+        // console.log(responseSubscriber.data);
+        setTotalSubscriber(responseSubscriber.data.data?.length);
 
         const responseProjects = await axios.get(
           "http://localhost:4000/articles/project",
@@ -57,6 +74,7 @@ export const DashboardProvider = ({
           "http://localhost:4000/articles/article",
           { withCredentials: true },
         );
+        // console.log(responseArticles);
         setArticleData(responseArticles.data.data);
         setTotalArticles(responseArticles.data.data.length);
 
@@ -65,13 +83,22 @@ export const DashboardProvider = ({
           { withCredentials: true },
         );
         setTotalMedias(responseMedias.data.data);
+
+        if(role == "admin") {
+          const allEditors = await axios.get(
+            "http://localhost:4000/user/editor",
+            { withCredentials: true },
+          );
+          setEditorData(allEditors.data?.data);
+
+        }
       } catch (error) {
-        console.error("Erreur lors du chargement des données :", error);
+        // console.log(error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [projects]);
 
   return (
     <DashboardContext.Provider
@@ -83,6 +110,14 @@ export const DashboardProvider = ({
         allEditor,
         articles,
         projects,
+        data,
+        setData,
+        isAllowed,
+        setIsAllowed,
+        role,
+        setRole,
+        token,
+        setToken,
       }}
     >
       {children}

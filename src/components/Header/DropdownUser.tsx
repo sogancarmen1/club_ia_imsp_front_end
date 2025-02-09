@@ -1,18 +1,44 @@
-"use client";
+// "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import ClickOutside from "@/components/ClickOutside";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { useRouter } from "next/navigation";
 import { cookies } from "next/headers";
+import { jwtDecode, JwtPayload } from "jwt-decode";
+import { useDashboard } from "@/app/context/dashboardContext";
 
-const DropdownUser = ({ token }: { token?: string | null }) => {
+interface CustomJwtPayload extends JwtPayload {
+  _id: string;
+}
+const DropdownUser = ({ token }: { token: string | undefined | null }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [user, setUser] = useState<any>();
+
   const route = useRouter();
 
   useEffect(() => {
-    console.log("Token reçu côté client :", token);
+    const value = async () => {
+      try {
+        if (token) {
+          const jwtDecoded = jwtDecode<CustomJwtPayload>(token);
+          const values = await axios.get(
+            `http://localhost:4000/user/${jwtDecoded._id}`,
+            {
+              withCredentials: true,
+            },
+          );
+          if (JSON.stringify(user) !== JSON.stringify(values.data)) {
+            setUser(values.data);
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    value();
   }, [token]);
 
   const handleSubmit = async (e: any) => {
@@ -37,16 +63,16 @@ const DropdownUser = ({ token }: { token?: string | null }) => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            Thomas Anree
+            {user?.data.email}
           </span>
-          <span className="block text-xs">UX Designer</span>
+          <span className="block text-xs">{user?.data.role}</span>
         </span>
 
         <span className="h-12 w-12 rounded-full">
           <Image
             width={112}
             height={112}
-            src={"/images/user/user-01.png"}
+            src={"/images/user/icons8-avatar-100.png"}
             style={{
               width: "auto",
               height: "auto",
@@ -77,7 +103,7 @@ const DropdownUser = ({ token }: { token?: string | null }) => {
         <div
           className={`absolute right-0 mt-4 flex w-62.5 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark`}
         >
-          <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 dark:border-strokedark">
+          {/* <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 dark:border-strokedark">
             <li>
               <Link
                 href="/settings"
@@ -103,7 +129,7 @@ const DropdownUser = ({ token }: { token?: string | null }) => {
                 Account Settings
               </Link>
             </li>
-          </ul>
+          </ul> */}
           <button
             onClick={handleSubmit}
             className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"

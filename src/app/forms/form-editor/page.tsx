@@ -2,6 +2,9 @@ import React from "react";
 import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import FormEditor from "@/components/FormEditor";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { useDashboard } from "@/app/context/dashboardContext";
 
 export const metadata: Metadata = {
   title: "Next.js Form Elements | TailAdmin - Next.js Dashboard Template",
@@ -10,8 +13,14 @@ export const metadata: Metadata = {
 };
 
 const FormElementsPage = () => {
+  // const { setRole, token } = useDashboard();
+  const token = cookies().get("Authorization")?.value;
+
+  if (!token) {
+    redirect("/auth/signin");
+  }
   return (
-    <DefaultLayout>
+    <DefaultLayout token={token}>
       <FormEditor />
     </DefaultLayout>
   );
