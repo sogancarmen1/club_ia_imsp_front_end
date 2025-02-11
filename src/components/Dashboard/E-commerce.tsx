@@ -1,8 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
-import ChartOne from "../Charts/ChartOne";
-import ChartTwo from "../Charts/ChartTwo";
 import ChatCard from "../Chat/ChatCard";
 import TableOne from "../Tables/TableOne";
 import CardDataStats from "../CardDataStats";
@@ -11,14 +9,6 @@ import axios from "axios";
 import TableFive from "../Tables/TableFive";
 import TableSix from "../Tables/TableSix";
 import { useDashboard } from "@/app/context/dashboardContext";
-
-const MapOne = dynamic(() => import("@/components/Maps/MapOne"), {
-  ssr: false,
-});
-
-const ChartThree = dynamic(() => import("@/components/Charts/ChartThree"), {
-  ssr: false,
-});
 
 const ECommerce: React.FC = () => {
   const { totalSubscriber, totalProjects, totalArticles, totalMedias } =
