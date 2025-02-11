@@ -10,7 +10,6 @@ import axios from "axios";
 import ImageGallery from "@/components/Showimages/page";
 import { toast } from "react-toastify";
 
-
 // export const metadata: Metadata = {
 //   title: "Next.js Form Layout | TailAdmin - Next.js Dashboard Template",
 //   description:

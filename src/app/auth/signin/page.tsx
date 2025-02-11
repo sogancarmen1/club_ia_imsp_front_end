@@ -12,6 +12,8 @@ import { useDashboard } from "@/app/context/dashboardContext";
 import { jwtDecode, JwtPayload } from "jwt-decode";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
+import Loader from "@/components/common/Loader";
+import { BeatLoader } from "react-spinners";
 
 interface CustomJwtPayload extends JwtPayload {
   _id: string;
@@ -28,6 +30,8 @@ export function Login() {}
 const SignIn: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isVisibleLoader, setIsVisibleLoader] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [error, setError] = useState("");
   const route = useRouter();
   const { setToken, token } = useDashboard();
@@ -35,8 +39,10 @@ const SignIn: React.FC = () => {
     e.preventDefault();
     let response: any;
     try {
+      setIsVisibleLoader(true);
+      setIsVisible(false);
       response = await axios.post(
-        "http://localhost:4000/auth/login",
+        `http://localhost:4000/auth/login`,
         {
           email: email,
           password: password,
@@ -51,6 +57,8 @@ const SignIn: React.FC = () => {
       }
     } catch (err: any) {
       toast.error(err.response.data.message);
+      setIsVisibleLoader(false);
+      setIsVisible(true);
     }
   };
 
@@ -292,14 +300,31 @@ const SignIn: React.FC = () => {
                       </svg>
                     </span>
                   </div>
+                  <div className="mt-3">
+                    <p>
+                      <Link
+                        href="/forgot-password"
+                        className="text-primary underline"
+                      >
+                        Mot de passe oublié ?
+                      </Link>
+                    </p>
+                  </div>
                 </div>
 
                 <div className="mb-5">
-                  <input
-                    type="submit"
-                    value="Sign In"
-                    className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
-                  />
+                  {isVisibleLoader && (
+                    <div className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90">
+                      <BeatLoader color="white" className="text-center" />
+                    </div>
+                  )}
+                  {isVisible && (
+                    <input
+                      type="submit"
+                      value="Sign In"
+                      className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
+                    />
+                  )}
                 </div>
 
                 {/* <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
@@ -338,15 +363,6 @@ const SignIn: React.FC = () => {
                   </span>
                   Sign in with Google
                 </button> */}
-
-                {/* <div className="mt-6 text-center">
-                  <p>
-                    Don’t have any account?{" "}
-                    <Link href="/auth/signup" className="text-primary">
-                      Sign Up
-                    </Link>
-                  </p>
-                </div> */}
               </form>
             </div>
           </div>

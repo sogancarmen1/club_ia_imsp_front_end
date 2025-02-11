@@ -17,6 +17,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { BeatLoader } from "react-spinners";
 
 const FormElements = () => {
   const [title, setTitle] = useState("");
@@ -24,6 +25,8 @@ const FormElements = () => {
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [isOptionSelected, setIsOptionSelected] = useState<boolean>(false);
   const [files, setFile] = useState<FileList | null>(null);
+  const [isVisibleLoader, setIsVisibleLoader] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -49,8 +52,10 @@ const FormElements = () => {
     formData.append("contain", contain);
     formData.append("type", selectedOption);
     try {
+      setIsVisibleLoader(true);
+      setIsVisible(false);
       const response = await axios.post(
-        "http://localhost:4000/articles",
+        `http://localhost:4000/articles`,
         formData,
         {
           withCredentials: true,
@@ -59,13 +64,16 @@ const FormElements = () => {
           },
         },
       );
+      if (response.data.sucess) {
+        setIsVisibleLoader(false);
+        setIsVisible(true);
+      }
       toast.success(response.data.message);
     } catch (error: any) {
+      setIsVisibleLoader(false);
+      setIsVisible(true);
       toast.error(error.response.data.message);
     }
-    setTitle("");
-    setContain("");
-    setSelectedOption("");
   };
 
   return (
@@ -325,21 +333,29 @@ const FormElements = () => {
                 {/* <MultiSelect id="multiSelect" /> */}
                 <div>
                   <label className="mb-3 block text-sm font-medium text-black dark:text-white">
-                    Ajouter un ou plusieus fichiers (OPTIONNEL)
+                    Ajouter un ou plusieus fichiers
                   </label>
                   <input
                     type="file"
                     onChange={handleFileChange}
                     multiple
+                    required
                     className="w-full cursor-pointer rounded-lg border-[1.5px] border-stroke bg-transparent outline-none transition file:mr-5 file:border-collapse file:cursor-pointer file:border-0 file:border-r file:border-solid file:border-stroke file:bg-whiter file:px-5 file:py-3 file:hover:bg-primary file:hover:bg-opacity-10 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:file:border-form-strokedark dark:file:bg-white/30 dark:file:text-white dark:focus:border-primary"
                   />
                 </div>
                 <div className="mb-5">
-                  <input
-                    type="submit"
-                    value="Ajouter"
-                    className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
-                  />
+                  {isVisibleLoader && (
+                    <div className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90">
+                      <BeatLoader color="white" className="text-center" />
+                    </div>
+                  )}
+                  {isVisible && (
+                    <input
+                      type="submit"
+                      value="Ajouter"
+                      className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
+                    />
+                  )}
                 </div>
 
                 {/* <div>

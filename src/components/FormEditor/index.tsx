@@ -13,18 +13,29 @@ import DatePickerTwo from "@/components/FormElements/DatePicker/DatePickerTwo";
 import DatePickerOne from "@/components/FormElements/DatePicker/DatePickerOne";
 import MultiSelect from "@/components/FormElements/MultiSelect";
 import SelectGroupTwo from "@/components/SelectGroup/SelectGroupTwo";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { BeatLoader } from "react-spinners";
+import Loader from "../common/Loader";
 
 const FormEditor = () => {
   const [email, setEmail] = useState("");
+  const [isVisibleLoader, setIsVisibleLoader] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 1000);
+  }, []);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
+      setIsVisibleLoader(true);
+      setIsVisible(false);
       const response = await axios.post(
-        "http://localhost:4000/user",
+        `http://localhost:4000/user`,
         {
           email: email,
         },
@@ -33,8 +44,14 @@ const FormEditor = () => {
         },
       );
       setEmail("");
+      if (response.data.sucess) {
+        setIsVisibleLoader(false);
+        setIsVisible(true);
+      }
       toast.success(response.data.message);
     } catch (error: any) {
+      setIsVisibleLoader(false);
+      setIsVisible(true);
       toast.error(error.response.data.message);
     }
   };
@@ -48,13 +65,13 @@ const FormEditor = () => {
           <div className="flex flex-col gap-9">
             {/* <!-- Textarea Fields --> */}
             <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+              {/* <div className="text-center py-16">{loading && <BeatLoader />}</div> */}
               <div className="border-b border-stroke px-6.5 py-4 dark:border-strokedark">
                 <h3 className="font-medium text-black dark:text-white">
                   Champ
                 </h3>
               </div>
               <div className="flex flex-col gap-5.5 p-6.5">
-                {/* <MultiSelect id="multiSelect" /> */}
                 <div>
                   <label className="mb-3 block text-sm font-medium text-black dark:text-white">
                     Email
@@ -71,11 +88,18 @@ const FormEditor = () => {
                   />
                 </div>
                 <div className="mb-5">
-                  <input
-                    type="submit"
-                    value="Ajouter"
-                    className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
-                  />
+                  {isVisibleLoader && (
+                    <div className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90">
+                      <BeatLoader color="white" className="text-center" />
+                    </div>
+                  )}
+                  {isVisible && (
+                    <input
+                      type="submit"
+                      value="Ajouter"
+                      className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
+                    />
+                  )}
                 </div>
               </div>
             </div>

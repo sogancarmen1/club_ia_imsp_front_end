@@ -36,16 +36,15 @@ const ActivateAccount: React.FC = () => {
 
   useEffect(() => {
     if (!token) {
-      toast.error("Token manquant.");
       router.push("/auth/signin");
     }
-  }, [token, router]);
+  }, [token]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (newPassword !== confirmPassword) {
-      setError("Les mots de passe ne correspondent pas.");
+      toast.success("Passwords don't match!");
       return;
     }
 
@@ -54,16 +53,12 @@ const ActivateAccount: React.FC = () => {
         token: token,
         password: newPassword,
       });
-
-      if (response.data.success) {
-        toast.success("Mot de passe réinitialisé avec succès !");
+      if (response.data.sucess) {
+        toast.success(response.data.message);
         router.push("/auth/signin");
-      } else {
-        setError(response.data.message);
       }
-    } catch (err) {
-      setError("Une erreur s'est produite lors de la réinitialisation.");
-      console.error(err);
+    } catch (error: any) {
+      toast.error(error.response.data.message);
     }
   };
 
@@ -227,7 +222,7 @@ const ActivateAccount: React.FC = () => {
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
               {/* <span className="mb-1.5 block font-medium">Start for free</span> */}
               <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-                Activation de compte
+                Changer mot de passe
               </h2>
 
               <form onSubmit={handleSubmit}>
@@ -314,7 +309,7 @@ const ActivateAccount: React.FC = () => {
                 <div className="mb-5">
                   <input
                     type="submit"
-                    value="Sign In"
+                    value="Changer mot de passe"
                     className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
                   />
                 </div>

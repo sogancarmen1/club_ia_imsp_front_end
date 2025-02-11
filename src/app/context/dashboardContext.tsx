@@ -84,13 +84,12 @@ export const DashboardProvider = ({
         );
         setTotalMedias(responseMedias.data.data);
 
-        if(role == "admin") {
+        if (role == "admin") {
           const allEditors = await axios.get(
             "http://localhost:4000/user/editor",
             { withCredentials: true },
           );
           setEditorData(allEditors.data?.data);
-
         }
       } catch (error) {
         // console.log(error);

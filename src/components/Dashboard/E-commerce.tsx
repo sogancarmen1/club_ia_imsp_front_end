@@ -23,63 +23,6 @@ const ChartThree = dynamic(() => import("@/components/Charts/ChartThree"), {
 const ECommerce: React.FC = () => {
   const { totalSubscriber, totalProjects, totalArticles, totalMedias } =
     useDashboard();
-  // const [totalSubscriber, setTotalSubscriber] = useState<number | null>(null);
-  // const [allEditor, setEditorData] = useState<any | null>(null);
-  // const [totalProjects, setTotalProjects] = useState<number | null>(null);
-  // const [totalArticles, setTotalArticles] = useState<number | null>(null);
-  // const [lenghtOfMedias, setTotalMedias] = useState<number | null>(null);
-  // const [articles, setArticleData] = useState<any | null>(null);
-  // const [projects, setProjectData] = useState<any | null>(null);
-
-  // useEffect(() => {
-  //   const fetchSubscribers = async () => {
-  //     try {
-  //       const allEditors = await axios.get(
-  //         "http://localhost:4000/user/editor",
-  //         {
-  //           withCredentials: true,
-  //         },
-  //       );
-  //       setEditorData(allEditors.data.data);
-
-  //       const responseSubscriber = await axios.get(
-  //         "http://localhost:4000/user",
-  //         {
-  //           withCredentials: true,
-  //         },
-  //       );
-  //       setTotalSubscriber(responseSubscriber.data.data.length);
-
-  //       const responseProjects = await axios.get(
-  //         `http://localhost:4000/articles/project`,
-  //         {
-  //           withCredentials: true,
-  //         },
-  //       );
-  //       setProjectData(responseProjects.data.data);
-  //       setTotalProjects(responseProjects.data.data.length);
-
-  //       const responseArticles = await axios.get(
-  //         `http://localhost:4000/articles/article`,
-  //         {
-  //           withCredentials: true,
-  //         },
-  //       );
-  //       setArticleData(responseArticles.data.data);
-  //       setTotalArticles(responseArticles.data.data.length);
-
-  //       const lenghtOfMedias = await axios.get(
-  //         `http://localhost:4000/articles/medias`,
-  //         {
-  //           withCredentials: true,
-  //         },
-  //       );
-  //       setTotalMedias(lenghtOfMedias.data.data);
-  //     } catch (error) {}
-  //   };
-
-  //   fetchSubscribers();
-  // }, []);
 
   return (
     <>
@@ -197,7 +140,7 @@ const ECommerce: React.FC = () => {
         </CardDataStats>
       </div>
       <div className="mt-4">
-        <div >
+        <div>
           <TableThree />
         </div>
         <div className="py-8">
