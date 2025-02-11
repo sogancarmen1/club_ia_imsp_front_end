@@ -49,10 +49,13 @@ const ActivateAccount: React.FC = () => {
     }
 
     try {
-      const response = await axios.put("http://localhost:4000/user/active", {
-        token: token,
-        password: newPassword,
-      });
+      const response = await axios.put(
+        "https://club-ia-imsp-backend.onrender.com/user/active",
+        {
+          token: token,
+          password: newPassword,
+        },
+      );
       if (response.data.sucess) {
         toast.success(response.data.message);
         router.push("/auth/signin");

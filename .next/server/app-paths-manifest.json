@@ -1,8 +1,7 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/auth/signin/page": "app/auth/signin/page.js",
   "/admin/page": "app/admin/page.js",
-  "/reset-password/page": "app/reset-password/page.js",
+  "/forms/form-layout/page": "app/forms/form-layout/page.js",
+  "/auth/signin/page": "app/auth/signin/page.js",
   "/forgot-password/page": "app/forgot-password/page.js",
-  "/forms/form-layout/page": "app/forms/form-layout/page.js"
+  "/reset-password/page": "app/reset-password/page.js"
 }

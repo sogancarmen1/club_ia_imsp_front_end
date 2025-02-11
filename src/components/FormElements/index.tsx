@@ -55,7 +55,7 @@ const FormElements = () => {
       setIsVisibleLoader(true);
       setIsVisible(false);
       const response = await axios.post(
-        `http://localhost:4000/articles`,
+        `https://club-ia-imsp-backend.onrender.com/articles`,
         formData,
         {
           withCredentials: true,
