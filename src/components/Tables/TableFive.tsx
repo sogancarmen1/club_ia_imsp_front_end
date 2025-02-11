@@ -15,18 +15,15 @@ const TableFive = () => {
 
   const handleSubmit = async (id: string) => {
     try {
-      await axios.delete(
-        `https://club-ia-imsp-backend.onrender.com/articles/${id}`,
-        {
-          withCredentials: true,
-        },
-      );
+      await axios.delete(`http://localhost:4000/articles/${id}`, {
+        withCredentials: true,
+      });
     } catch (error) {}
   };
   const handleSubmitSecond = async (id: string) => {
     try {
       const result = await axios.get(
-        `https://club-ia-imsp-backend.onrender.com/articles/by/${id}`,
+        `http://localhost:4000/articles/by/${id}`,
         {
           withCredentials: true,
         },

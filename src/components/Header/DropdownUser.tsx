@@ -24,7 +24,7 @@ const DropdownUser = ({ token }: { token: string | undefined | null }) => {
         if (token) {
           const jwtDecoded = jwtDecode<CustomJwtPayload>(token);
           const values = await axios.get(
-            `https://club-ia-imsp-backend.onrender.com/user/${jwtDecoded._id}`,
+            `http://localhost:4000/user/${jwtDecoded._id}`,
             {
               withCredentials: true,
             },
@@ -44,7 +44,7 @@ const DropdownUser = ({ token }: { token: string | undefined | null }) => {
   const handleSubmit = async (e: any) => {
     try {
       await axios.post(
-        "https://club-ia-imsp-backend.onrender.com/auth/logout",
+        "http://localhost:4000/auth/logout",
         {},
         {
           withCredentials: true,
