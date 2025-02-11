@@ -45,9 +45,10 @@ export default function Admin() {
       setToken(storedToken);
       const decoded = jwtDecode<CustomJwtPayload>(storedToken);
       setRole(decoded._role);
-    } else {
-      router.replace("/auth/signin");
     }
+    // else {
+    //   router.push("/auth/signin");
+    // }
   }, []);
 
   return (
