@@ -46,11 +46,11 @@ export default function Admin() {
     setRole(decoded._role);
     console.log(storedToken);
   }
-  useEffect(() => {
-    if (!storedToken) {
-      router.push("/auth/signin");
-    }
-  }, [token]);
+  // useEffect(() => {
+  //   if (!storedToken) {
+  //     router.push("/auth/signin");
+  //   }
+  // }, [token]);
 
   return (
     <>
