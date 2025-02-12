@@ -38,8 +38,8 @@ export default function Admin() {
   const [authToken, setAuthToken] = useState<string | null>(null);
   const router = useRouter();
 
+  const storedToken = Cookies.get("Authorization");
   useEffect(() => {
-    const storedToken = Cookies.get("Authorization");
     if (storedToken) {
       setAuthToken(storedToken);
       setToken(storedToken);
