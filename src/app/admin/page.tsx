@@ -5,7 +5,6 @@ import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { useEffect, useState } from "react";
 import { redirect } from "next/navigation";
 import Cookies from "js-cookie";
-import { cookies } from "next/headers";
 import { useDashboard } from "@/app/context/dashboardContext";
 import { jwtDecode, JwtPayload } from "jwt-decode";
 import { useRouter } from "next/navigation";
@@ -38,16 +37,15 @@ export default function Admin() {
   const [authToken, setAuthToken] = useState<string | null>(null);
   const router = useRouter();
 
+  const storedToken = Cookies.get("Authorization");
   useEffect(() => {
-    const storedToken = Cookies.get("Authorization");
     if (storedToken) {
       setAuthToken(storedToken);
       setToken(storedToken);
       const decoded = jwtDecode<CustomJwtPayload>(storedToken);
       setRole(decoded._role);
-    } else {
-      router.push("/auth/signin");
     }
+    if (!storedToken) router.push("/auth/signin");
   }, [token]);
 
   return (
