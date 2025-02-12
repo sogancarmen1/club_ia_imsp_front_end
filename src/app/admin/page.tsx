@@ -39,6 +39,9 @@ export default function Admin() {
   const router = useRouter();
 
   const storedToken = Cookies.get("Authorization");
+  if (!storedToken) {
+    router.push("/auth/signin");
+  }
   if (storedToken) {
     setAuthToken(storedToken);
     setToken(storedToken);
@@ -47,9 +50,6 @@ export default function Admin() {
     console.log(storedToken);
   }
   // useEffect(() => {
-  //   if (!storedToken) {
-  //     router.push("/auth/signin");
-  //   }
   // }, [token]);
 
   return (
