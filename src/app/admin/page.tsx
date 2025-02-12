@@ -38,19 +38,23 @@ export default function Admin() {
   const [authToken, setAuthToken] = useState<string | null>(null);
   const router = useRouter();
 
-  const storedToken = Cookies.get("Authorization");
-  if (!storedToken) {
-    router.push("/auth/signin");
-  }
-  if (storedToken) {
-    setAuthToken(storedToken);
-    setToken(storedToken);
-    const decoded = jwtDecode<CustomJwtPayload>(storedToken);
-    setRole(decoded._role);
-    console.log(storedToken);
-  }
-  // useEffect(() => {
-  // }, [token]);
+  useEffect(() => {
+    const storedToken = Cookies.get("Authorization");
+    if (storedToken === undefined) {
+      // Le cookie est en cours de chargement, ne rien faire
+      return;
+    }
+    if (!storedToken) {
+      router.push("/auth/signin");
+    }
+    if (storedToken) {
+      setAuthToken(storedToken);
+      setToken(storedToken);
+      const decoded = jwtDecode<CustomJwtPayload>(storedToken);
+      setRole(decoded._role);
+      console.log(storedToken);
+    }
+  }, [router]);
 
   return (
     <>
