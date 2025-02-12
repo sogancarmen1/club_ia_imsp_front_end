@@ -45,7 +45,9 @@ export default function Admin() {
       setToken(storedToken);
       const decoded = jwtDecode<CustomJwtPayload>(storedToken);
       setRole(decoded._role);
-    } else {
+      console.log(storedToken);
+    }
+    if (!storedToken) {
       router.push("/auth/signin");
     }
   }, [token]);
