@@ -39,14 +39,14 @@ export default function Admin() {
   const router = useRouter();
 
   const storedToken = Cookies.get("Authorization");
+  if (storedToken) {
+    setAuthToken(storedToken);
+    setToken(storedToken);
+    const decoded = jwtDecode<CustomJwtPayload>(storedToken);
+    setRole(decoded._role);
+    console.log(storedToken);
+  }
   useEffect(() => {
-    if (storedToken) {
-      setAuthToken(storedToken);
-      setToken(storedToken);
-      const decoded = jwtDecode<CustomJwtPayload>(storedToken);
-      setRole(decoded._role);
-      console.log(storedToken);
-    }
     if (!storedToken) {
       router.push("/auth/signin");
     }
