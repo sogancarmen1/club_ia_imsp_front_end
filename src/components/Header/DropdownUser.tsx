@@ -24,7 +24,7 @@ const DropdownUser = () => {
       try {
         if (token) {
           const values = await axios.get(
-            `https://club-ia-imsp-backend.onrender.com/${valueDecoded._id}`,
+            `https://club-ia-imsp-backend.onrender.com/user/${valueDecoded._id}`,
             {
               withCredentials: true,
             },

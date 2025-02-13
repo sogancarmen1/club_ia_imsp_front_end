@@ -60,7 +60,7 @@ export const DashboardProvider = ({
     const fetchData = async () => {
       try {
         const responseSubscriber = await axios.get(
-          "https://club-ia-imsp-backend.onrender.com",
+          "https://club-ia-imsp-backend.onrender.com/user",
           { withCredentials: true },
         );
         // console.log(responseSubscriber.data);
@@ -89,7 +89,7 @@ export const DashboardProvider = ({
 
         if (role == "admin") {
           const allEditors = await axios.get(
-            "https://club-ia-imsp-backend.onrender.com/editor",
+            "https://club-ia-imsp-backend.onrender.com/user/editor",
             { withCredentials: true },
           );
           setEditorData(allEditors.data?.data);

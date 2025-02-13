@@ -50,7 +50,7 @@ const ActivateAccount: React.FC = () => {
 
     try {
       const response = await axios.put(
-        "https://club-ia-imsp-backend.onrender.com/active",
+        "https://club-ia-imsp-backend.onrender.com/user/active",
         {
           token: token,
           password: newPassword,
