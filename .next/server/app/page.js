@@ -220,17 +220,17 @@
                     );
                     r(e.data.data?.length);
                     let t = await i.Z.get(
-                      "http://localhost:4000/articles/project",
+                      "https://club-ia-imsp-backend.onrender.com/articles/project",
                       { withCredentials: !0 },
                     );
                     v(t.data.data), c(t.data.data.length);
                     let s = await i.Z.get(
-                      "http://localhost:4000/articles/article",
+                      "https://club-ia-imsp-backend.onrender.com/articles/article",
                       { withCredentials: !0 },
                     );
                     f(s.data.data), h(s.data.data.length);
                     let a = await i.Z.get(
-                      "http://localhost:4000/articles/medias",
+                      "https://club-ia-imsp-backend.onrender.com/articles/medias",
                       { withCredentials: !0 },
                     );
                     if ((m(a.data.data), "admin" == q)) {

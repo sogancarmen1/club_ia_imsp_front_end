@@ -67,14 +67,14 @@ export const DashboardProvider = ({
         setTotalSubscriber(responseSubscriber.data.data?.length);
 
         const responseProjects = await axios.get(
-          "http://localhost:4000/articles/project",
+          "https://club-ia-imsp-backend.onrender.com/articles/project",
           { withCredentials: true },
         );
         setProjectData(responseProjects.data.data);
         setTotalProjects(responseProjects.data.data.length);
 
         const responseArticles = await axios.get(
-          "http://localhost:4000/articles/article",
+          "https://club-ia-imsp-backend.onrender.com/articles/article",
           { withCredentials: true },
         );
         // console.log(responseArticles);
@@ -82,7 +82,7 @@ export const DashboardProvider = ({
         setTotalArticles(responseArticles.data.data.length);
 
         const responseMedias = await axios.get(
-          "http://localhost:4000/articles/medias",
+          "https://club-ia-imsp-backend.onrender.com/articles/medias",
           { withCredentials: true },
         );
         setTotalMedias(responseMedias.data.data);

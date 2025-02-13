@@ -42,7 +42,7 @@ const DropdownUser = () => {
   const handleSubmit = async (e: any) => {
     try {
       await axios.post(
-        "http://localhost:4000/auth/logout",
+        "https://club-ia-imsp-backend.onrender.com/auth/logout",
         {},
         {
           withCredentials: true,

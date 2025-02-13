@@ -97,15 +97,22 @@
             { setData: l, setIsAllowed: r } = (0, i.Q)(),
             a = async (e) => {
               try {
-                await c.Z.delete("http://localhost:4000/articles/".concat(e), {
-                  withCredentials: !0,
-                });
+                await c.Z.delete(
+                  "https://club-ia-imsp-backend.onrender.com/articles/".concat(
+                    e,
+                  ),
+                  {
+                    withCredentials: !0,
+                  },
+                );
               } catch (e) {}
             },
             d = async (e) => {
               try {
                 let s = await c.Z.get(
-                  "http://localhost:4000/articles/by/".concat(e),
+                  "https://club-ia-imsp-backend.onrender.com/articles/by/".concat(
+                    e,
+                  ),
                   { withCredentials: !0 },
                 );
                 l(s.data.data), r(!0), t.push("/forms/form-layout");
@@ -266,15 +273,22 @@
             r = (0, x.useRouter)(),
             a = async (e) => {
               try {
-                await c.Z.delete("http://localhost:4000/articles/".concat(e), {
-                  withCredentials: !0,
-                });
+                await c.Z.delete(
+                  "https://club-ia-imsp-backend.onrender.com/articles/".concat(
+                    e,
+                  ),
+                  {
+                    withCredentials: !0,
+                  },
+                );
               } catch (e) {}
             },
             d = async (e) => {
               try {
                 let s = await c.Z.get(
-                  "http://localhost:4000/articles/by/".concat(e),
+                  "https://club-ia-imsp-backend.onrender.com/articles/by/".concat(
+                    e,
+                  ),
                   { withCredentials: !0 },
                 );
                 t(s.data.data), l(!0), r.push("/forms/form-layout");

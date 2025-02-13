@@ -17,7 +17,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ files, onDelete }) => {
           <div key={index} className="group relative">
             {/* Image */}
             <img
-              src={`http://localhost:4000/test-image/${img.files_names}`}
+              src={`https://club-ia-imsp-backend.onrender.com/test-image/${img.files_names}`}
               alt={img.original_name}
               className="h-32 w-full cursor-pointer rounded-lg shadow-md transition-transform duration-300 hover:scale-105"
               onClick={() => setSelectedImage(img.files_names)}

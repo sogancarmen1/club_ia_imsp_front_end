@@ -42,7 +42,7 @@ const SignIn: React.FC = () => {
       setIsVisibleLoader(true);
       setIsVisible(false);
       response = await axios.post(
-        `http://localhost:4000/auth/login`,
+        `https://club-ia-imsp-backend.onrender.com/auth/login`,
         {
           email: email,
           password: password,
