@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -12,8 +12,9 @@ import { useDashboard } from "@/app/context/dashboardContext";
 interface CustomJwtPayload extends JwtPayload {
   _id: string;
 }
-const DropdownUser = ({ token }: { token: string | undefined | null }) => {
+const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { valueDecoded, token } = useDashboard();
   const [user, setUser] = useState<any>();
 
   const route = useRouter();
@@ -22,19 +23,16 @@ const DropdownUser = ({ token }: { token: string | undefined | null }) => {
     const value = async () => {
       try {
         if (token) {
-          const jwtDecoded = jwtDecode<CustomJwtPayload>(token);
           const values = await axios.get(
-            `http://localhost:4000/user/${jwtDecoded._id}`,
+            `http://localhost:4000/user/${valueDecoded._id}`,
             {
               withCredentials: true,
             },
           );
-          if (JSON.stringify(user) !== JSON.stringify(values.data)) {
-            setUser(values.data);
-          }
+          setUser(values.data);
         }
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
 
