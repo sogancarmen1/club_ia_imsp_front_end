@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import Loader from "@/components/common/Loader";
 import { DashboardProvider } from "../app/context/dashboardContext";
 import { ToastContainer } from "react-toastify";
+import { sendResponse } from "next/dist/server/image-optimizer";
 
 export default function RootLayout({
   children,
@@ -18,9 +19,9 @@ export default function RootLayout({
 
   // const pathname = usePathname();
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 1000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout((sendResponse({ success: true })) => setLoading(false), 1000);
+  // }, []);
 
   return (
     <html lang="en">
