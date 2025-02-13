@@ -14,26 +14,18 @@
           "originalSource": "/admin/:path*"
         },
         {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/forms\\/form-editor(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(.json)?[\\/#\\?]?$",
-          "originalSource": "/forms/form-editor/:path*"
-        },
-        {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/forms\\/form-elements(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(.json)?[\\/#\\?]?$",
-          "originalSource": "/forms/form-elements/:path*"
-        },
-        {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/forms\\/form-layout(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(.json)?[\\/#\\?]?$",
-          "originalSource": "/forms/form-layout/:path*"
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/forms(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(.json)?[\\/#\\?]?$",
+          "originalSource": "/forms/:path*"
         }
       ],
       "wasm": [],
       "assets": [],
       "env": {
-        "__NEXT_BUILD_ID": "uVh0wKKegrNCd28gWmefO",
-        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "28yoR2azH9uFeDpABBoGaZXgwon4MdvFMp03LYEtSjE=",
-        "__NEXT_PREVIEW_MODE_ID": "6108112d82d94640c9a92ebcb240960f",
-        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "9d49aa17fe7e1bc3660d132f9568fc8f4d06ad9da3bea8609112eb547b83d240",
-        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "23fbabc5fbd755cf6b253e787262412552eb32c8a606622d122d50564440b519"
+        "__NEXT_BUILD_ID": "p6Wa9bLHzdySVwjtb94LR",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "+x6LMK2MdyxS30Txf9xreJ9mFmWKOL2MYXkGvHpfsho=",
+        "__NEXT_PREVIEW_MODE_ID": "981adfe1adce2f1c3968a399f9e24a1e",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "8b9d5cea4183ab4cd1fe928407262a15a76c9611ed80cc39a52cad8c2e8cfb48",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "a30ad4a85ce3ad46e9c6fe0352aed69dd7126123b6a33c6791651154f17de74a"
       }
     }
   },
