@@ -66,6 +66,7 @@ const SignIn: React.FC = () => {
         setTimeout(() => route.push("/admin"), 500);
       }
     } catch (err: any) {
+      console.log(error);
       toast.error(err.response.data.message);
       setIsVisibleLoader(false);
       setIsVisible(true);
