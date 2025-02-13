@@ -62,8 +62,8 @@ const SignIn: React.FC = () => {
 
         toast.success(response.data.message);
 
+        route.push("/admin");
       }
-      route.push("/admin");
     } catch (err: any) {
       toast.error(err.response.data.message);
       setIsVisibleLoader(false);
