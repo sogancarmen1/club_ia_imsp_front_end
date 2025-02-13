@@ -22,6 +22,8 @@ interface DashboardContextProps {
   setRole: (value: any) => void;
   token: any | null;
   setToken: (value: any) => void;
+  valueDecoded: any | null;
+  setValueDecoded: (value: any) => void;
 }
 
 const DashboardContext = createContext<DashboardContextProps | undefined>(
@@ -44,6 +46,7 @@ export const DashboardProvider = ({
   const [isAllowed, setIsAllowed] = useState<boolean>(false);
   const [role, setRole] = useState<string>("");
   const [token, setToken] = useState<any | null>(null);
+  const [valueDecoded, setValueDecoded] = useState<any | null>(null);
 
   useEffect(() => {
     const decodedToken = getDecodedToken();
@@ -57,21 +60,21 @@ export const DashboardProvider = ({
     const fetchData = async () => {
       try {
         const responseSubscriber = await axios.get(
-          "https://club-ia-imsp-backend.onrender.com/user",
+          "http://localhost:4000/user",
           { withCredentials: true },
         );
         // console.log(responseSubscriber.data);
         setTotalSubscriber(responseSubscriber.data.data?.length);
 
         const responseProjects = await axios.get(
-          "https://club-ia-imsp-backend.onrender.com/articles/project",
+          "http://localhost:4000/articles/project",
           { withCredentials: true },
         );
         setProjectData(responseProjects.data.data);
         setTotalProjects(responseProjects.data.data.length);
 
         const responseArticles = await axios.get(
-          "https://club-ia-imsp-backend.onrender.com/articles/article",
+          "http://localhost:4000/articles/article",
           { withCredentials: true },
         );
         // console.log(responseArticles);
@@ -79,14 +82,14 @@ export const DashboardProvider = ({
         setTotalArticles(responseArticles.data.data.length);
 
         const responseMedias = await axios.get(
-          "https://club-ia-imsp-backend.onrender.com/articles/medias",
+          "http://localhost:4000/articles/medias",
           { withCredentials: true },
         );
         setTotalMedias(responseMedias.data.data);
 
         if (role == "admin") {
           const allEditors = await axios.get(
-            "https://club-ia-imsp-backend.onrender.com/user/editor",
+            "http://localhost:4000/user/editor",
             { withCredentials: true },
           );
           setEditorData(allEditors.data?.data);
@@ -117,6 +120,8 @@ export const DashboardProvider = ({
         setRole,
         token,
         setToken,
+        valueDecoded,
+        setValueDecoded,
       }}
     >
       {children}

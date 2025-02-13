@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 import React, { useEffect } from "react";
 import FormElements from "@/components/FormElements";
 import { Metadata } from "next";
@@ -14,14 +14,13 @@ import { useDashboard } from "@/app/context/dashboardContext";
 // };
 
 const FormElementsPage = () => {
-  // const { setRole, token } = useDashboard();
-  const token = cookies().get("Authorization")?.value;
+  const { token } = useDashboard();
+  useEffect(() => {
+    if (!token) redirect("/auth/signin");
+  }, [token]);
 
-  if (!token) {
-    redirect("/auth/signin");
-  }
   return (
-    <DefaultLayout token={token}>
+    <DefaultLayout>
       <FormElements />
     </DefaultLayout>
   );

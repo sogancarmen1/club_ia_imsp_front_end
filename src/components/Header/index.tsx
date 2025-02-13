@@ -12,13 +12,12 @@ import { useEffect, useState } from "react";
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
-  token?: string | null;
 }) => {
-  const [tokenChange, setTokenChange] = useState<string | undefined | null>();
+  // const [tokenChange, setTokenChange] = useState<string | undefined | null>();
 
-  useEffect(() => {
-    setTokenChange(props.token)
-  }, [props.token]);
+  // useEffect(() => {
+  //   setTokenChange(props.token)
+  // }, [props.token]);
   // const tokens = getDecodedToken()?._id;
   return (
     <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
@@ -130,7 +129,7 @@ const Header = (props: {
           </ul>
 
           {/* <!-- User Area --> */}
-          <DropdownUser token={tokenChange} />
+          <DropdownUser />
           {/* <!-- User Area --> */}
         </div>
       </div>

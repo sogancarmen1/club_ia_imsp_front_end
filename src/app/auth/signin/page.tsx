@@ -17,7 +17,7 @@ import { BeatLoader } from "react-spinners";
 
 interface CustomJwtPayload extends JwtPayload {
   _id: string;
-  role: string;
+  _role: string;
 }
 
 // export function Login() {}
@@ -34,7 +34,7 @@ const SignIn: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [error, setError] = useState("");
   const route = useRouter();
-  const { setToken, token } = useDashboard();
+  const { setToken, setRole, setValueDecoded } = useDashboard();
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     let response: any;
@@ -42,7 +42,7 @@ const SignIn: React.FC = () => {
       setIsVisibleLoader(true);
       setIsVisible(false);
       response = await axios.post(
-        `https://club-ia-imsp-backend.onrender.com/auth/login`,
+        `http://localhost:4000/auth/login`,
         {
           email: email,
           password: password,
@@ -53,6 +53,12 @@ const SignIn: React.FC = () => {
       );
       if (response.data.sucess == true) {
         route.push("/admin");
+        const decoded = jwtDecode<CustomJwtPayload>(
+          response.data.data.match(/Authorization=([^;]+)/)[1],
+        );
+        setValueDecoded(decoded);
+        setToken(response.data.data.match(/Authorization=([^;]+)/)[1]);
+        setRole(decoded._role);
         toast.success(response.data.message);
       }
     } catch (err: any) {
