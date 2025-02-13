@@ -1,5 +1,18 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
+  "/forms/form-layout/page": "app/forms/form-layout/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/admin/page": "app/admin/page.js",
   "/auth/signin/page": "app/auth/signin/page.js",
+  "/forms/form-elements/page": "app/forms/form-elements/page.js",
+  "/forms/form-editor/page": "app/forms/form-editor/page.js",
   "/forgot-password/page": "app/forgot-password/page.js",
-  "/admin/page": "app/admin/page.js"
+  "/page": "app/page.js",
+  "/tables/page": "app/tables/page.js",
+  "/auth/signup/page": "app/auth/signup/page.js",
+  "/settings/page": "app/settings/page.js",
+  "/reset-password/page": "app/reset-password/page.js",
+  "/ui/alerts/page": "app/ui/alerts/page.js",
+  "/profile/page": "app/profile/page.js",
+  "/ui/buttons/page": "app/ui/buttons/page.js"
 }
