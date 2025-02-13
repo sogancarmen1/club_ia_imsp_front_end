@@ -11,6 +11,11 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
+    "/forgot-password/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/forgot-password/page.js"
+    ],
     "/admin/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -20,16 +25,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/forms/form-editor/page.js"
-    ],
-    "/forms/form-elements/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/forms/form-elements/page.js"
-    ],
-    "/forms/form-layout/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/forms/form-layout/page.js"
     ]
   }
 }

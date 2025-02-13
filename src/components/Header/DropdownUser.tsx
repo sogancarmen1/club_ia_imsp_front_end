@@ -14,7 +14,7 @@ interface CustomJwtPayload extends JwtPayload {
 }
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const { valueDecoded, token } = useDashboard();
+  const { valueDecoded, token, email } = useDashboard();
   const [user, setUser] = useState<any>();
 
   const route = useRouter();
@@ -24,7 +24,7 @@ const DropdownUser = () => {
       try {
         if (token) {
           const values = await axios.get(
-            `https://club-ia-imsp-backend.onrender.com/user/${valueDecoded._id}`,
+            `https://club-ia-imsp-backend.onrender.com/user/by/${email}`,
             {
               withCredentials: true,
             },

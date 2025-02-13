@@ -3,10 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import FormEditor from "@/components/FormEditor";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import { useDashboard } from "@/app/context/dashboardContext";
-import { Loader } from "lucide-react";
 
 // export const metadata: Metadata = {
 //   title: "Next.js Form Elements | TailAdmin - Next.js Dashboard Template",
@@ -15,11 +11,6 @@ import { Loader } from "lucide-react";
 // };
 
 const FormElementsPage = () => {
-  const { token } = useDashboard();
-  useEffect(() => {
-    if (!token) redirect("/auth/signin");
-  }, [token]);
-
   return (
     <DefaultLayout>
       <FormEditor />

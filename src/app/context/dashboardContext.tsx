@@ -24,6 +24,8 @@ interface DashboardContextProps {
   setToken: (value: any) => void;
   valueDecoded: any | null;
   setValueDecoded: (value: any) => void;
+  email: string;
+  setEmails: (value: any) => void;
 }
 
 const DashboardContext = createContext<DashboardContextProps | undefined>(
@@ -47,6 +49,7 @@ export const DashboardProvider = ({
   const [role, setRole] = useState<string>("");
   const [token, setToken] = useState<any | null>(null);
   const [valueDecoded, setValueDecoded] = useState<any | null>(null);
+  const [email, setEmails] = useState<any | null>(null);
 
   useEffect(() => {
     const decodedToken = getDecodedToken();
@@ -122,6 +125,8 @@ export const DashboardProvider = ({
         setToken,
         valueDecoded,
         setValueDecoded,
+        email,
+        setEmails,
       }}
     >
       {children}
