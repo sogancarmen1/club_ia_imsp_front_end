@@ -53,15 +53,17 @@ const SignIn: React.FC = () => {
         },
       );
       if (response.data.sucess == true) {
+        const token = response.data.data.match(/Authorization=([^;]+)/)[1];
+        const decoded = jwtDecode<CustomJwtPayload>(token);
+
         setEmails(email);
-        route.push("/admin");
-        const decoded = jwtDecode<CustomJwtPayload>(
-          response.data.data.match(/Authorization=([^;]+)/)[1],
-        );
-        setValueDecoded(decoded);
-        setToken(response.data.data.match(/Authorization=([^;]+)/)[1]);
+        setToken(token);
         setRole(decoded._role);
+        setValueDecoded(decoded);
+
         toast.success(response.data.message);
+
+        setTimeout(() => route.push("/admin"), 500);
       }
     } catch (err: any) {
       toast.error(err.response.data.message);

@@ -1,5 +1,7 @@
 {
-  "/auth/signin/page": "app/auth/signin/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
   "/forgot-password/page": "app/forgot-password/page.js",
-  "/admin/page": "app/admin/page.js"
+  "/admin/page": "app/admin/page.js",
+  "/forms/form-editor/page": "app/forms/form-editor/page.js",
+  "/auth/signin/page": "app/auth/signin/page.js"
 }
