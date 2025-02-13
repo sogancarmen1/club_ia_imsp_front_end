@@ -19,9 +19,9 @@ export default function RootLayout({
 
   // const pathname = usePathname();
 
-  // useEffect(() => {
-  //   setTimeout((sendResponse({ success: true })) => setLoading(false), 1000);
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 1000);
+  }, []);
 
   return (
     <html lang="en">
