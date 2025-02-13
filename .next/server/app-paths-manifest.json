@@ -1,6 +1,5 @@
 {
   "/auth/signin/page": "app/auth/signin/page.js",
   "/forgot-password/page": "app/forgot-password/page.js",
-  "/admin/page": "app/admin/page.js",
-  "/forms/form-editor/page": "app/forms/form-editor/page.js"
+  "/admin/page": "app/admin/page.js"
 }
