@@ -61,6 +61,7 @@ const SignIn: React.FC = () => {
         setValueDecoded(decoded);
 
         toast.success(response.data.message);
+        console.log(response.data);
 
         setTimeout(() => route.push("/admin"), 500);
       }
