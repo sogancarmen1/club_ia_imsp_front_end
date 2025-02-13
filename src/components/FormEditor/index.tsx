@@ -35,7 +35,7 @@ const FormEditor = () => {
       setIsVisibleLoader(true);
       setIsVisible(false);
       const response = await axios.post(
-        `https://club-ia-imsp-backend.onrender.com/user/email`,
+        `https://club-ia-imsp-backend.onrender.com/user`,
         {
           email: email,
         },
