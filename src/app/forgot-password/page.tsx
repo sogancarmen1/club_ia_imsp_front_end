@@ -37,7 +37,7 @@ const SignIn: React.FC = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/user/forgot-password",
+        "https://club-ia-imsp-backend.onrender.com/forgot-password",
         {
           email: email,
         },
