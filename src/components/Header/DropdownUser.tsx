@@ -14,7 +14,7 @@ interface CustomJwtPayload extends JwtPayload {
 }
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const { valueDecoded, token } = useDashboard();
+  const { valueDecoded, token, email } = useDashboard();
   const [user, setUser] = useState<any>();
 
   const route = useRouter();
@@ -24,16 +24,14 @@ const DropdownUser = () => {
       try {
         if (token) {
           const values = await axios.get(
-            `http://localhost:4000/user/${valueDecoded._id}`,
+            `http://localhost:4000/user/by/${email}`,
             {
               withCredentials: true,
             },
           );
           setUser(values.data);
         }
-      } catch (error) {
-        // console.log(error);
-      }
+      } catch (error) {}
     };
 
     value();

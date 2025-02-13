@@ -10,11 +10,6 @@ import { jwtDecode, JwtPayload } from "jwt-decode";
 import { useDashboard } from "@/app/context/dashboardContext";
 
 const FormElementsPage = () => {
-  const { token } = useDashboard();
-  useEffect(() => {
-    if (!token) redirect("/auth/signin");
-  }, [token]);
-
   return (
     <DefaultLayout>
       <FormLayout />

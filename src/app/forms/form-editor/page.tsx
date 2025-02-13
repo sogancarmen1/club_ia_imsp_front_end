@@ -15,11 +15,6 @@ import { Loader } from "lucide-react";
 // };
 
 const FormElementsPage = () => {
-  const { token } = useDashboard();
-  useEffect(() => {
-    if (!token) redirect("/auth/signin");
-  }, [token]);
-
   return (
     <DefaultLayout>
       <FormEditor />

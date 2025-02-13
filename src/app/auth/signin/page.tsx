@@ -14,6 +14,7 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import Loader from "@/components/common/Loader";
 import { BeatLoader } from "react-spinners";
+import Head from "next/head";
 
 interface CustomJwtPayload extends JwtPayload {
   _id: string;
@@ -34,7 +35,7 @@ const SignIn: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [error, setError] = useState("");
   const route = useRouter();
-  const { setToken, setRole, setValueDecoded } = useDashboard();
+  const { setToken, setRole, setValueDecoded, setEmails } = useDashboard();
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     let response: any;
@@ -52,6 +53,7 @@ const SignIn: React.FC = () => {
         },
       );
       if (response.data.sucess == true) {
+        setEmails(email);
         route.push("/admin");
         const decoded = jwtDecode<CustomJwtPayload>(
           response.data.data.match(/Authorization=([^;]+)/)[1],
