@@ -3,7 +3,7 @@ import Link from "next/link";
 import DarkModeSwitcher from "./DarkModeSwitcher";
 import DropdownMessage from "./DropdownMessage";
 import DropdownNotification from "./DropdownNotification";
-import DropdownUser from "./DropdownUser";
+// import DropdownUser from "./DropdownUser";
 import Image from "next/image";
 import { cookies } from "next/headers";
 import { getDecodedToken } from "@/utils/auth";
@@ -129,7 +129,7 @@ const Header = (props: {
           </ul>
 
           {/* <!-- User Area --> */}
-          <DropdownUser />
+          {/* <DropdownUser /> */}
           {/* <!-- User Area --> */}
         </div>
       </div>
