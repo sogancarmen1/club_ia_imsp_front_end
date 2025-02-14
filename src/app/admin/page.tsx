@@ -20,22 +20,7 @@ interface CustomJwtPayload extends JwtPayload {
 // };
 
 export default function Admin() {
-  // const { setRole, token, setToken } = useDashboard();
-  // const storedToken = cookies().get("Authorization")?.value;
-  // console.log("myv", storedToken);
-  // if(!storedToken) redirect("/auth/signin")
-  // useEffect(() => {
-  //   if (storedToken) {
-  //     setAuthToken(storedToken);
-  //     setToken(storedToken);
-  //     const decoded = jwtDecode<CustomJwtPayload>(storedToken);
-  //     setRole(decoded._role);
-  //   }
-  //   if (!storedToken) router.push("/auth/signin");
-  //   // if (!token) redirect("/auth/signin");
-  // }, [token]);
-  // useEffect(()=> {}, [toke])
-  const what = localStorage.getItem("val");
+  const what = localStorage.getItem("isAuthenticated");
   if (!what) redirect("/auth/signin");
   return (
     <>
