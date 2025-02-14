@@ -62,6 +62,7 @@ const SignIn: React.FC = () => {
         setValueDecoded(decoded);
 
         toast.success(response.data.message);
+        localStorage.setItem("val", "true");
 
         route.push("/admin");
       }

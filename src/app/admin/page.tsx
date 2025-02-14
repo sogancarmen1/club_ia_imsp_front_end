@@ -1,4 +1,4 @@
-// "use client"
+"use client";
 import ECommerce from "@/components/Dashboard/E-commerce";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { Metadata } from "next";
@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import { cookies } from "next/headers";
 import { jwtDecode, JwtPayload } from "jwt-decode";
 import { redirect } from "next/navigation";
+import { useEffect } from "react";
 
 interface CustomJwtPayload extends JwtPayload {
   _id: string;
@@ -18,23 +19,24 @@ interface CustomJwtPayload extends JwtPayload {
 //   description: "Il s'agit de la page d'administration du site du club",
 // };
 
-
-
 export default function Admin() {
   // const { setRole, token, setToken } = useDashboard();
-    const storedToken = cookies().get("Authorization")?.value;
-    console.log("myv", storedToken);
-    if(!storedToken) redirect("/auth/signin")
-    // useEffect(() => {
-    //   if (storedToken) {
-    //     setAuthToken(storedToken);
-    //     setToken(storedToken);
-    //     const decoded = jwtDecode<CustomJwtPayload>(storedToken);
-    //     setRole(decoded._role);
-    //   }
-    //   if (!storedToken) router.push("/auth/signin");
-    //   // if (!token) redirect("/auth/signin");
-    // }, [token]);
+  // const storedToken = cookies().get("Authorization")?.value;
+  // console.log("myv", storedToken);
+  // if(!storedToken) redirect("/auth/signin")
+  // useEffect(() => {
+  //   if (storedToken) {
+  //     setAuthToken(storedToken);
+  //     setToken(storedToken);
+  //     const decoded = jwtDecode<CustomJwtPayload>(storedToken);
+  //     setRole(decoded._role);
+  //   }
+  //   if (!storedToken) router.push("/auth/signin");
+  //   // if (!token) redirect("/auth/signin");
+  // }, [token]);
+  // useEffect(()=> {}, [toke])
+  const what = localStorage.getItem("val");
+  if (!what) redirect("/auth/signin");
   return (
     <>
       <DefaultLayout>
