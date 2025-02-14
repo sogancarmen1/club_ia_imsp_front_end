@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   description: "Il s'agit de la page d'administration du site du club",
 };
 
+
 export default function Admin() {
   return (
     <>
