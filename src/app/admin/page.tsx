@@ -1,9 +1,10 @@
+"use client"
 import ECommerce from "@/components/Dashboard/E-commerce";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { Metadata } from "next";
 import { useDashboard } from "../context/dashboardContext";
 import Cookies from "js-cookie";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { jwtDecode, JwtPayload } from "jwt-decode";
 import { redirect } from "next/dist/server/api-utils";
