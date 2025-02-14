@@ -62,9 +62,11 @@ const SignIn: React.FC = () => {
 
         toast.success(response.data.message);
 
+        console.log("Login successful, redirecting to /admin"); 
         route.push("/admin");
       }
     } catch (err: any) {
+      console.log("Login error:", err);
       toast.error(err.response.data.message);
       setIsVisibleLoader(false);
       setIsVisible(true);

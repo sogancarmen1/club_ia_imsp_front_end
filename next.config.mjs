@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true, // S'assurer que Next.js supporte bien les fichiers dans "app"
-  },
   // reactStrictMode: false,
   images: {
     remotePatterns: [
