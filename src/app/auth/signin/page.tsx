@@ -52,14 +52,6 @@ const SignIn: React.FC = () => {
         },
       );
       if (response.data.sucess == true) {
-        const token = response.data.data.match(/Authorization=([^;]+)/)[1];
-        const decoded = jwtDecode<CustomJwtPayload>(token);
-
-        setEmails(email);
-        setToken(token);
-        setRole(decoded._role);
-        setValueDecoded(decoded);
-
         toast.success(response.data.message);
         route.push("/admin");
       }

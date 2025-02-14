@@ -33,7 +33,7 @@ export default function Admin() {
       }
       if (!storedToken) router.push("/auth/signin");
       // if (!token) redirect("/auth/signin");
-    }, [token]);
+    }, []);
   return (
     <>
       <DefaultLayout>
