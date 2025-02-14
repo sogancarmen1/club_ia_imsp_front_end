@@ -53,6 +53,7 @@ const SignIn: React.FC = () => {
       );
       if (response.data.sucess == true) {
         toast.success(response.data.message);
+        localStorage.setItem("val", "true");
         route.push("/admin");
       }
     } catch (err: any) {
