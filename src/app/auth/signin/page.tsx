@@ -63,7 +63,7 @@ const SignIn: React.FC = () => {
 
         toast.success(response.data.message);
 
-        setTimeout(() => route.push("/admin"), 500);
+        route.push("/admin");
       }
     } catch (err: any) {
       console.log(error);
