@@ -1,18 +1,14 @@
 "use client";
 import ECommerce from "@/components/Dashboard/E-commerce";
-import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { useEffect, useState } from "react";
 import { redirect } from "next/navigation";
-import Cookies from "js-cookie";
-import { useDashboard } from "@/app/context/dashboardContext";
-import { jwtDecode, JwtPayload } from "jwt-decode";
-import { useRouter } from "next/navigation";
+import { cookies } from "next/headers";
 
-interface CustomJwtPayload extends JwtPayload {
-  _id: string;
-  _role: string;
-}
+// interface CustomJwtPayload extends JwtPayload {
+//   _id: string;
+//   _role: string;
+// }
 
 // export const metadata: Metadata = {
 //   title: "Club IA-IMSP | Admin",
@@ -20,21 +16,9 @@ interface CustomJwtPayload extends JwtPayload {
 // };
 
 export default function Admin() {
-  const { setRole, token, setToken } = useDashboard();
-    const [authToken, setAuthToken] = useState<string | null>(null);
-    const router = useRouter();
-    const storedToken = Cookies.get("Authorization");
-    if (storedToken) {
-      setAuthToken(storedToken);
-      setToken(storedToken);
-      const decoded = jwtDecode<CustomJwtPayload>(storedToken);
-      setRole(decoded._role);
-    }
-    console.log("hghgh", storedToken);
-    useEffect(() => {
-      if (!storedToken) router.push("/auth/signin");
-      // if (!token) redirect("/auth/signin");
-    }, []);
+  const storedToken = cookies().get("Authorization")?.value;
+    console.log("myv", storedToken);
+    if(!storedToken) redirect("/auth/signin")
   return (
     <>
       <DefaultLayout>
