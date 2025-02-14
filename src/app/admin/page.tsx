@@ -20,21 +20,7 @@ interface CustomJwtPayload extends JwtPayload {
 // };
 
 export default function Admin() {
-  const [isLoading, setIsLoading] = useState(true); // État de chargement
-  const router = useRouter();
-  const {token} = useDashboard()
-   useEffect(() => {
-    // Vérifiez le token au chargement de la page
-    if (!token) {
-      router.push("/auth/signin"); // Redirigez si le token est absent
-    } else {
-      setIsLoading(false); // Autorisez le rendu du composant
-    }
-  }, [token, router]);
-
-  if (isLoading) {
-    return <div>Loading...</div>; // Affichez un indicateur de chargement
-  }
+  console.log(Cookies.get("Authorization"));
   return (
     <>
       <DefaultLayout>
