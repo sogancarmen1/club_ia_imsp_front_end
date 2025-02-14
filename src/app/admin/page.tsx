@@ -19,6 +19,7 @@ export default function Admin() {
   // const storedToken = cookies().get("Authorization")?.value;
   //   console.log("myv", storedToken);
   // if(!storedToken) redirect("/auth/signin")
+  //
   if (!localStorage.getItem("val")) redirect("/auth/signin");
   return (
     <>
