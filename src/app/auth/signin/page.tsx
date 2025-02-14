@@ -61,7 +61,6 @@ const SignIn: React.FC = () => {
         setValueDecoded(decoded);
 
         toast.success(response.data.message);
-        console.log(Cookies.get("Authorization"));
         console.log("Login successful, redirecting to /admin"); 
         route.push("/admin");
       }

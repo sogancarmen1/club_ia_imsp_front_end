@@ -20,7 +20,6 @@ interface CustomJwtPayload extends JwtPayload {
 // };
 
 export default function Admin() {
-  console.log(Cookies.get("Authorization"));
   return (
     <>
       <DefaultLayout>
