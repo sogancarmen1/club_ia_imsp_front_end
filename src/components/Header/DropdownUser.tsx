@@ -48,6 +48,7 @@ const DropdownUser = () => {
           withCredentials: true,
         },
       );
+      localStorage.removeItem("val");
       route.push("/auth/signin");
     } catch (error) {}
   };
@@ -63,9 +64,7 @@ const DropdownUser = () => {
           <span className="block text-sm font-medium text-black dark:text-white">
             {/* {user?.data.email} */}
           </span>
-          <span className="block text-xs">
-            {/* {user?.data.role} */}
-            </span>
+          <span className="block text-xs">{/* {user?.data.role} */}</span>
         </span>
 
         <span className="h-12 w-12 rounded-full">
