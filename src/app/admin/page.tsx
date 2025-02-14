@@ -20,6 +20,8 @@ interface CustomJwtPayload extends JwtPayload {
 // };
 
 export default function Admin() {
+  const {token} = useDashboard()
+  if(!token) redirect("/auth/signin")
   return (
     <>
       <DefaultLayout>

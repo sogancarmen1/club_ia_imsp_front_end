@@ -1,11 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    middleware: {
-      requestHeaders: true,
-      cookies: true,
-    },
-  },
   images: {
     remotePatterns: [
       {
