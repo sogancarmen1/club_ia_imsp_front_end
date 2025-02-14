@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(req: NextRequest) {
   const token = req.cookies.get("Authorization")?.value;
+  console.log("Headers in middleware:", req.headers.get("cookie"));
   console.log("Token in middleware:", token);
 
   if (!token) {
