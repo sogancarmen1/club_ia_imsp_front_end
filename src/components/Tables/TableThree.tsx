@@ -21,7 +21,7 @@ const TableThree = () => {
             withCredentials: true,
           },
         );
-        console.log(res.data.data.user.role);
+        // console.log(res.data.data.user.role);
         if (res.data.data.user.role == "admin") {
           const allEditors = await axios.get(
             "https://club-ia-imsp-backend.onrender.com/user/editor",
@@ -45,9 +45,16 @@ const TableThree = () => {
 
   const handleSubmit = async (id: string) => {
     try {
-      await axios.delete(`https://club-ia-imsp-backend.onrender.com/user/${id}`, {
-        withCredentials: true,
-      });
+      await axios.delete(
+        `https://club-ia-imsp-backend.onrender.com/user/${id}`,
+        {
+          withCredentials: true,
+        },
+      );
+      const index = allEditor.findIndex((item: any) => item.id === id);
+      if (index !== -1) {
+        allEditor.splice(index, 1);
+      }
     } catch (error) {}
   };
   return (
