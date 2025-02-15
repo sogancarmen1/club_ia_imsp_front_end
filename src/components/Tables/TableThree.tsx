@@ -9,8 +9,8 @@ import { useEffect, useState } from "react";
 
 const TableThree = () => {
   // const token = cookies().get("Authorization")?.value;
-  const { role } = useDashboard();
   const [allEditor, setAllEditor] = useState<any>();
+  const [role, setRole] = useState<any>();
 
   useEffect(() => {
     const value = async () => {
@@ -18,13 +18,13 @@ const TableThree = () => {
         const res = await axios.get("http://localhost:4000/auth/me", {
           withCredentials: true,
         });
-        console.log(res.data.data.user.role);
         if (res.data.data.user.role == "admin") {
           const allEditors = await axios.get(
             "http://localhost:4000/user/editor",
             { withCredentials: true },
           );
           setAllEditor(allEditors.data?.data);
+          setRole(res.data.data.user.role);
         }
       } catch (error) {}
     };
@@ -33,10 +33,10 @@ const TableThree = () => {
   }, []);
 
   // Condition pour déterminer si le composant doit être affiché
-  const shouldRender = role && role !== "admin"; // Exemple de condition
+  const shouldRender = role == "admin"; // Exemple de condition
   // console.log(role);
   // Si la condition n'est pas remplie, ne pas afficher le composant
-  if (shouldRender) {
+  if (!shouldRender) {
     return <p></p>; // Vous pouvez personnaliser ce message
   }
 
