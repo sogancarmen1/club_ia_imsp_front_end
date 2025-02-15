@@ -21,6 +21,7 @@ const config: Config = {
     },
     extend: {
       colors: {
+        primary1: "#1363C6",
         current: "currentColor",
         transparent: "transparent",
         white: "#FFFFFF",

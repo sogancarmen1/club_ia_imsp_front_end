@@ -68,8 +68,8 @@ const SignIn: React.FC = () => {
         route.push("/admin");
       }
     } catch (err: any) {
-      // console.log(err);
-      toast.error(err.response.data.message);
+      console.log(err);
+      toast.error(err.response?.data.message);
       setIsVisibleLoader(false);
       setIsVisible(true);
     }
