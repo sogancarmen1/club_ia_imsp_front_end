@@ -11,6 +11,7 @@ const TableThree = () => {
   // const token = cookies().get("Authorization")?.value;
   const { role } = useDashboard();
   const [allEditor, setAllEditor] = useState<any>();
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
   useEffect(() => {
     const value = async () => {
@@ -21,13 +22,13 @@ const TableThree = () => {
             withCredentials: true,
           },
         );
-        // console.log(res.data.data.user.role);
         if (res.data.data.user.role == "admin") {
           const allEditors = await axios.get(
             "https://club-ia-imsp-backend.onrender.com/user/editor",
             { withCredentials: true },
           );
           setAllEditor(allEditors.data?.data);
+          setIsAdmin(true);
         }
       } catch (error) {}
     };
@@ -61,22 +62,24 @@ const TableThree = () => {
     <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <div className="max-w-full overflow-x-auto">
         <table className="w-full table-auto">
-          <thead>
-            <tr className="bg-gray-2 text-left dark:bg-meta-4">
-              <th className="min-w-[220px] px-4 py-4 font-medium text-black dark:text-white xl:pl-11">
-                Email éditeurs
-              </th>
-              <th className="min-w-[150px] px-4 py-4 font-medium text-black dark:text-white">
-                Date d'inscription
-              </th>
-              <th className="min-w-[120px] px-4 py-4 font-medium text-black dark:text-white">
-                Etat compte
-              </th>
-              <th className="px-4 py-4 font-medium text-black dark:text-white">
-                Actions
-              </th>
-            </tr>
-          </thead>
+          {isAdmin && (
+            <thead>
+              <tr className="bg-gray-2 text-left dark:bg-meta-4">
+                <th className="min-w-[220px] px-4 py-4 font-medium text-black dark:text-white xl:pl-11">
+                  Email éditeurs
+                </th>
+                <th className="min-w-[150px] px-4 py-4 font-medium text-black dark:text-white">
+                  Date d'inscription
+                </th>
+                <th className="min-w-[120px] px-4 py-4 font-medium text-black dark:text-white">
+                  Etat compte
+                </th>
+                <th className="px-4 py-4 font-medium text-black dark:text-white">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+          )}
           <tbody>
             {allEditor
               ?.slice()
