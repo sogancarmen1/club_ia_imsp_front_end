@@ -5,11 +5,32 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 import { cookies } from "next/headers";
+import { useEffect, useState } from "react";
 
 const TableThree = () => {
   // const token = cookies().get("Authorization")?.value;
-  const { allEditor, role } = useDashboard();
-  const storedToken = Cookies.get("Authorization");
+  const { role } = useDashboard();
+  const [allEditor, setAllEditor] = useState<any>();
+
+  useEffect(() => {
+    const value = async () => {
+      try {
+        const res = await axios.get("http://localhost:4000/auth/me", {
+          withCredentials: true,
+        });
+        console.log(res.data.data.user.role);
+        if (res.data.data.user.role == "admin") {
+          const allEditors = await axios.get(
+            "http://localhost:4000/user/editor",
+            { withCredentials: true },
+          );
+          setAllEditor(allEditors.data?.data);
+        }
+      } catch (error) {}
+    };
+
+    value();
+  }, []);
 
   // Condition pour déterminer si le composant doit être affiché
   const shouldRender = role && role !== "admin"; // Exemple de condition

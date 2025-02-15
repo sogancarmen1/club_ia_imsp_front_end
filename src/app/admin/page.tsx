@@ -20,7 +20,8 @@ export default function Admin() {
   //   console.log("myv", storedToken);
   // if(!storedToken) redirect("/auth/signin")
   //
-  if (!localStorage.getItem("val")) redirect("/auth/signin");
+  const what = localStorage.getItem("isAuthenticated");
+  if (!what) redirect("/auth/signin");
   return (
     <>
       <DefaultLayout>

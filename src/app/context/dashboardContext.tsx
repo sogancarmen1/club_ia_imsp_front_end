@@ -90,13 +90,13 @@ export const DashboardProvider = ({
         );
         setTotalMedias(responseMedias.data.data);
 
-        if (role == "admin") {
-          const allEditors = await axios.get(
-            "https://club-ia-imsp-backend.onrender.com/user/editor",
-            { withCredentials: true },
-          );
-          setEditorData(allEditors.data?.data);
-        }
+        // if (role == "admin") {
+        //   const allEditors = await axios.get(
+        //     "https://club-ia-imsp-backend.onrender.com/user/editor",
+        //     { withCredentials: true },
+        //   );
+        //   setEditorData(allEditors.data?.data);
+        // }
       } catch (error) {
         // console.log(error);
       }

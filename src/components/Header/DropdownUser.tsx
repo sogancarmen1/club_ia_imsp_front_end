@@ -14,7 +14,6 @@ interface CustomJwtPayload extends JwtPayload {
 }
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const { valueDecoded, token, email } = useDashboard();
   const [user, setUser] = useState<any>();
 
   const route = useRouter();
@@ -22,22 +21,21 @@ const DropdownUser = () => {
   useEffect(() => {
     const value = async () => {
       try {
-        if (token) {
-          const values = await axios.get(
-            `https://club-ia-imsp-backend.onrender.com/user/by/${email}`,
-            {
-              withCredentials: true,
-            },
-          );
-          setUser(values.data);
-        }
-      } catch (error) {
-        // console.log(error);
-      }
+        const res = await axios.get("http://localhost:4000/auth/me", {
+          withCredentials: true,
+        });
+        const values = await axios.get(
+          `http://localhost:4000/user/by/${res.data.data.user.email}`,
+          {
+            withCredentials: true,
+          },
+        );
+        setUser(values.data);
+      } catch (error) {}
     };
 
     value();
-  }, [token]);
+  }, []);
 
   const handleSubmit = async (e: any) => {
     try {
@@ -48,7 +46,7 @@ const DropdownUser = () => {
           withCredentials: true,
         },
       );
-      localStorage.removeItem("val");
+      localStorage.removeItem("isAuthenticated");
       route.push("/auth/signin");
     } catch (error) {}
   };
@@ -62,9 +60,9 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            {/* {user?.data.email} */}
+            {user?.data.email}
           </span>
-          <span className="block text-xs">{/* {user?.data.role} */}</span>
+          <span className="block text-xs">{user?.data.role}</span>
         </span>
 
         <span className="h-12 w-12 rounded-full">
