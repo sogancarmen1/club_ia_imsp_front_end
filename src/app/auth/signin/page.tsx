@@ -52,14 +52,14 @@ const SignIn: React.FC = () => {
         },
       );
       if (response.data.sucess == true) {
-        const token = response.data.data.match(/Authorization=([^;]+)/)[1];
-        const decoded = jwtDecode<CustomJwtPayload>(token);
-        // console.log(decoded);
+        // const token = response.data.data.match(/Authorization=([^;]+)/)[1];
+        // const decoded = jwtDecode<CustomJwtPayload>(token);
+        // // console.log(decoded);
 
-        setEmails(email);
-        setToken(token);
-        setRole(decoded._role);
-        setValueDecoded(decoded);
+        // setEmails(email);
+        // setToken(token);
+        // setRole(decoded._role);
+        // setValueDecoded(decoded);
 
         toast.success(response.data.message);
         localStorage.setItem("isAuthenticated", "true");
