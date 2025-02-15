@@ -45,7 +45,7 @@ const TableThree = () => {
 
   const handleSubmit = async (id: string) => {
     try {
-      await axios.delete(`https://club-ia-imsp-backend.onrender.com/${id}`, {
+      await axios.delete(`https://club-ia-imsp-backend.onrender.com/user/${id}`, {
         withCredentials: true,
       });
     } catch (error) {}
