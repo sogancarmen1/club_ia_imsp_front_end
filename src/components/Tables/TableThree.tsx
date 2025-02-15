@@ -35,8 +35,8 @@ const TableThree = () => {
     value();
   }, []);
 
-  const shouldRender = role && role !== "admin";
-  if (shouldRender) {
+  const shouldRender = role == "admin";
+  if (!shouldRender) {
     return <p></p>;
   }
 
