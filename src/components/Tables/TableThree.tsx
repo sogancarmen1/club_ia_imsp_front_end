@@ -27,7 +27,7 @@ const TableThree = () => {
             { withCredentials: true },
           );
           setAllEditor(allEditors.data?.data);
-          setRole(true);
+          setRole(res.data.data.user.role);
         }
       } catch (error) {}
     };
