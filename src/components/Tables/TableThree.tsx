@@ -15,13 +15,16 @@ const TableThree = () => {
   useEffect(() => {
     const value = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/auth/me", {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          "https://club-ia-imsp-backend.onrender.com/auth/me",
+          {
+            withCredentials: true,
+          },
+        );
         console.log(res.data.data.user.role);
         if (res.data.data.user.role == "admin") {
           const allEditors = await axios.get(
-            "http://localhost:4000/user/editor",
+            "https://club-ia-imsp-backend.onrender.com/user/editor",
             { withCredentials: true },
           );
           setAllEditor(allEditors.data?.data);

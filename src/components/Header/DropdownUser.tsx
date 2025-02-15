@@ -21,11 +21,14 @@ const DropdownUser = () => {
   useEffect(() => {
     const value = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/auth/me", {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          "https://club-ia-imsp-backend.onrender.com/auth/me",
+          {
+            withCredentials: true,
+          },
+        );
         const values = await axios.get(
-          `http://localhost:4000/user/by/${res.data.data.user.email}`,
+          `https://club-ia-imsp-backend.onrender.com/user/by/${res.data.data.user.email}`,
           {
             withCredentials: true,
           },

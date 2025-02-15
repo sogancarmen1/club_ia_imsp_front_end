@@ -5,9 +5,12 @@ function AuthChecker() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/auth/me", {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          "https://club-ia-imsp-backend.onrender.com/auth/me",
+          {
+            withCredentials: true,
+          },
+        );
         const data = res.data?.data.isTrue;
         if (!data) {
           localStorage.removeItem("isAuthenticated");
