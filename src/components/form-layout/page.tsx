@@ -9,6 +9,9 @@ import { useDashboard } from "@/app/context/dashboardContext";
 import axios from "axios";
 import ImageGallery from "@/components/Showimages/page";
 import { toast } from "react-toastify";
+import { useQuill } from "react-quilljs";
+import "quill/dist/quill.snow.css";
+import { redirect } from "next/navigation";
 
 // export const metadata: Metadata = {
 //   title: "Next.js Form Layout | TailAdmin - Next.js Dashboard Template",
@@ -17,10 +20,22 @@ import { toast } from "react-toastify";
 // };
 
 const FormLayout = () => {
+  const what = localStorage.getItem("isAuthenticated");
+  if (!what) redirect("/auth/signin");
   const { data } = useDashboard();
   const [article, setArticle] = useState<any>(null);
   // const [files, setFile] = useState<FileList | null>(null);
   const [files, setFiles] = useState<any[]>(data?.files || []);
+
+  const { quill, quillRef } = useQuill();
+  useEffect(() => {
+    if (quill) {
+      quill.clipboard.dangerouslyPasteHTML(data.contain);
+      quill.on("text-change", () => {
+        setArticleContain(quill.root.innerHTML);
+      });
+    }
+  }, [quill]);
 
   useEffect(() => {
     if (data) {
@@ -85,8 +100,8 @@ const FormLayout = () => {
       <Breadcrumb pageName="Mise à jour" />
 
       <form onSubmit={handleSubmit}>
-        <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
-          <div className="flex flex-col gap-9">
+        <div className="gap-9 sm:grid-cols-2">
+          <div className="mb-10 flex flex-col gap-9">
             {/* <!-- Contact Form --> */}
             <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
               <div className="border-b border-stroke px-6.5 py-4 dark:border-strokedark">
@@ -113,7 +128,13 @@ const FormLayout = () => {
                   <label className="mb-3 block text-sm font-medium text-black dark:text-white">
                     Contenu
                   </label>
-                  <textarea
+                  <div
+                    className="w-full rounded-xl border-stroke bg-transparent text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    // style={{ width: 500, height: 300 }}
+                  >
+                    <div ref={quillRef} />
+                  </div>
+                  {/* <textarea
                     rows={6}
                     value={articleContain}
                     onChange={(e: any) => {
@@ -121,7 +142,7 @@ const FormLayout = () => {
                     }}
                     placeholder="Type your message"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                  ></textarea>
+                  ></textarea> */}
                 </div>
               </div>
             </div>

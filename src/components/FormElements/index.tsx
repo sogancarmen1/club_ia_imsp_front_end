@@ -14,12 +14,16 @@ import DatePickerOne from "@/components/FormElements/DatePicker/DatePickerOne";
 import MultiSelect from "@/components/FormElements/MultiSelect";
 import SelectGroupTwo from "@/components/SelectGroup/SelectGroupTwo";
 import axios from "axios";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRouter, redirect } from "next/navigation";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { BeatLoader } from "react-spinners";
+import { useQuill } from "react-quilljs";
+import "quill/dist/quill.snow.css";
 
 const FormElements = () => {
+  const what = localStorage.getItem("isAuthenticated");
+  if (!what) redirect("/auth/signin");
   const [title, setTitle] = useState("");
   const [contain, setContain] = useState("");
   const [selectedOption, setSelectedOption] = useState<string>("");
@@ -27,6 +31,15 @@ const FormElements = () => {
   const [files, setFile] = useState<FileList | null>(null);
   const [isVisibleLoader, setIsVisibleLoader] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+
+  const { quill, quillRef } = useQuill();
+  useEffect(() => {
+    if (quill) {
+      quill.on("text-change", () => {
+        setContain(quill.root.innerHTML);
+      });
+    }
+  }, [quill]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -81,8 +94,8 @@ const FormElements = () => {
       <Breadcrumb pageName="Ajouter un article ou un projet" />
 
       <form onSubmit={handleSubmit}>
-        <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
-          <div className="flex flex-col gap-9">
+        <div className="gap-9 sm:grid-cols-2">
+          <div className="mb-10 flex flex-col gap-9">
             {/* <!-- Input Fields --> */}
             <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
               <div className="border-b border-stroke px-6.5 py-4 dark:border-strokedark">
@@ -116,7 +129,13 @@ const FormElements = () => {
                       <label className="mb-3 block text-sm font-medium text-black dark:text-white">
                         Contenu
                       </label>
-                      <textarea
+                      <div
+                        className="w-full rounded-xl border-stroke bg-transparent text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                        // style={{ width: 500, height: 300 }}
+                      >
+                        <div ref={quillRef} />
+                      </div>
+                      {/* <textarea
                         value={contain}
                         onChange={(e: any) => {
                           setContain(e.target.value);
@@ -125,7 +144,7 @@ const FormElements = () => {
                         placeholder="Entrez le contenu ou description de l'article/projet"
                         required
                         className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                      ></textarea>
+                      ></textarea> */}
                     </div>
                   </div>
                 </div>
