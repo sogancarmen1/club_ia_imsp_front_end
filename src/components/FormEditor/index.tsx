@@ -18,8 +18,11 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { BeatLoader } from "react-spinners";
 import Loader from "../common/Loader";
+import { redirect } from "next/navigation";
 
 const FormEditor = () => {
+  const what = localStorage.getItem("isAuthenticated");
+  if (!what) redirect("/auth/signin");
   const [email, setEmail] = useState("");
   const [isVisibleLoader, setIsVisibleLoader] = useState(false);
   const [isVisible, setIsVisible] = useState(true);

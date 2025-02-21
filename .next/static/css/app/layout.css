@@ -785,6 +785,15 @@ body{
 .mt-6\.5{
   margin-top: 1.625rem;
 }
+.mb-20{
+  margin-bottom: 5rem;
+}
+.mb-22{
+  margin-bottom: 5.5rem;
+}
+.mb-15{
+  margin-bottom: 3.75rem;
+}
 .\!block{
   display: block !important;
 }
@@ -1165,6 +1174,18 @@ body{
 .gap-9{
   gap: 2.25rem;
 }
+.gap-20{
+  gap: 5rem;
+}
+.gap-22{
+  gap: 5.5rem;
+}
+.gap-30{
+  gap: 7.5rem;
+}
+.gap-32{
+  gap: 8rem;
+}
 .space-x-3\.5 > :not([hidden]) ~ :not([hidden]){
   --tw-space-x-reverse: 0;
   margin-right: calc(0.875rem * var(--tw-space-x-reverse));
@@ -1206,6 +1227,9 @@ body{
 }
 .rounded-sm{
   border-radius: 0.125rem;
+}
+.rounded-xl{
+  border-radius: 0.75rem;
 }
 .rounded-t{
   border-top-left-radius: 0.25rem;
