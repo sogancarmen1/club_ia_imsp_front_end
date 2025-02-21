@@ -29,7 +29,7 @@ const FormLayout = () => {
 
   const { quill, quillRef } = useQuill();
   useEffect(() => {
-    if (quill) {
+    if (quill && quillRef.current) {
       quill.clipboard.dangerouslyPasteHTML(data.contain);
       quill.on("text-change", () => {
         setArticleContain(quill.root.innerHTML);

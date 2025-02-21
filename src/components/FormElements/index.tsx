@@ -34,7 +34,7 @@ const FormElements = () => {
 
   const { quill, quillRef } = useQuill();
   useEffect(() => {
-    if (quill) {
+    if (quill && quillRef.current) {
       quill.on("text-change", () => {
         setContain(quill.root.innerHTML);
       });
