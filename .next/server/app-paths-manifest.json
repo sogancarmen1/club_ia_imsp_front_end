@@ -1,9 +1,5 @@
 {
-  "/forms/form-elements/page": "app/forms/form-elements/page.js",
-  "/forms/form-editor/page": "app/forms/form-editor/page.js",
-  "/forgot-password/page": "app/forgot-password/page.js",
-  "/forms/form-layout/page": "app/forms/form-layout/page.js",
   "/admin/page": "app/admin/page.js",
-  "/auth/signin/page": "app/auth/signin/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
+  "/forms/form-editor/page": "app/forms/form-editor/page.js",
+  "/reset-password/page": "app/reset-password/page.js"
 }

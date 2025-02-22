@@ -785,15 +785,6 @@ body{
 .mt-6\.5{
   margin-top: 1.625rem;
 }
-.mb-20{
-  margin-bottom: 5rem;
-}
-.mb-22{
-  margin-bottom: 5.5rem;
-}
-.mb-15{
-  margin-bottom: 3.75rem;
-}
 .\!block{
   display: block !important;
 }
@@ -1173,18 +1164,6 @@ body{
 }
 .gap-9{
   gap: 2.25rem;
-}
-.gap-20{
-  gap: 5rem;
-}
-.gap-22{
-  gap: 5.5rem;
-}
-.gap-30{
-  gap: 7.5rem;
-}
-.gap-32{
-  gap: 8rem;
 }
 .space-x-3\.5 > :not([hidden]) ~ :not([hidden]){
   --tw-space-x-reverse: 0;
@@ -2294,10 +2273,6 @@ input[type="search"]::-webkit-search-cancel-button{
   display: none !important;
 }
 
-.file\:mr-4::file-selector-button{
-  margin-right: 1rem;
-}
-
 .file\:mr-5::file-selector-button{
   margin-right: 1.25rem;
 }
@@ -2310,16 +2285,8 @@ input[type="search"]::-webkit-search-cancel-button{
   cursor: pointer;
 }
 
-.file\:rounded::file-selector-button{
-  border-radius: 0.25rem;
-}
-
 .file\:border-0::file-selector-button{
   border-width: 0px;
-}
-
-.file\:border-\[0\.5px\]::file-selector-button{
-  border-width: 0.5px;
 }
 
 .file\:border-r::file-selector-button{
@@ -2335,19 +2302,9 @@ input[type="search"]::-webkit-search-cancel-button{
   border-color: rgb(226 232 240 / var(--tw-border-opacity, 1));
 }
 
-.file\:bg-\[\#EEEEEE\]::file-selector-button{
-  --tw-bg-opacity: 1;
-  background-color: rgb(238 238 238 / var(--tw-bg-opacity, 1));
-}
-
 .file\:bg-whiter::file-selector-button{
   --tw-bg-opacity: 1;
   background-color: rgb(245 247 253 / var(--tw-bg-opacity, 1));
-}
-
-.file\:px-2\.5::file-selector-button{
-  padding-left: 0.625rem;
-  padding-right: 0.625rem;
 }
 
 .file\:px-5::file-selector-button{
@@ -2355,19 +2312,9 @@ input[type="search"]::-webkit-search-cancel-button{
   padding-right: 1.25rem;
 }
 
-.file\:py-1::file-selector-button{
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-}
-
 .file\:py-3::file-selector-button{
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
-}
-
-.file\:text-sm::file-selector-button{
-  font-size: 0.875rem;
-  line-height: 1.25rem;
 }
 
 .hover\:scale-105:hover{
@@ -2459,11 +2406,6 @@ input[type="search"]::-webkit-search-cancel-button{
 .focus\:outline-none:focus{
   outline: 2px solid transparent;
   outline-offset: 2px;
-}
-
-.file\:focus\:border-primary:focus::file-selector-button{
-  --tw-border-opacity: 1;
-  border-color: rgb(60 80 224 / var(--tw-border-opacity, 1));
 }
 
 .focus-visible\:shadow-none:focus-visible{
@@ -2616,11 +2558,6 @@ input[type="search"]::-webkit-search-cancel-button{
   border-color: rgb(61 77 96 / var(--tw-border-opacity, 1));
 }
 
-.dark\:file\:border-strokedark:is(.dark *)::file-selector-button{
-  --tw-border-opacity: 1;
-  border-color: rgb(46 58 71 / var(--tw-border-opacity, 1));
-}
-
 .dark\:file\:bg-white\/30:is(.dark *)::file-selector-button{
   background-color: rgb(255 255 255 / 0.3);
 }
@@ -2646,11 +2583,6 @@ input[type="search"]::-webkit-search-cancel-button{
 .dark\:focus\:border-primary:focus:is(.dark *){
   --tw-border-opacity: 1;
   border-color: rgb(60 80 224 / var(--tw-border-opacity, 1));
-}
-
-.dark\:disabled\:bg-black:disabled:is(.dark *){
-  --tw-bg-opacity: 1;
-  background-color: rgb(28 36 52 / var(--tw-bg-opacity, 1));
 }
 
 @media (min-width: 375px){

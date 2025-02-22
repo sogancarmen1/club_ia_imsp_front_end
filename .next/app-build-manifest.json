@@ -11,32 +11,15 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/forms/form-elements/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/forms/form-elements/page.css",
-      "static/chunks/app/forms/form-elements/page.js"
-    ],
-    "/auth/signin/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/auth/signin/page.js"
-    ],
     "/forms/form-editor/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/forms/form-editor/page.js"
     ],
-    "/forgot-password/page": [
+    "/reset-password/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/forgot-password/page.js"
-    ],
-    "/forms/form-layout/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/forms/form-layout/page.css",
-      "static/chunks/app/forms/form-layout/page.js"
+      "static/chunks/app/reset-password/page.js"
     ]
   }
 }
