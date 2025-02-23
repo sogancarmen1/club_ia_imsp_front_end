@@ -10,7 +10,7 @@ import axios from "axios";
 import ImageGallery from "@/components/Showimages/page";
 import { toast } from "react-toastify";
 import { redirect } from "next/navigation";
-import DOMPurify from "dompurify";
+// import DOMPurify from "dompurify";
 import { useQuill } from "react-quilljs";
 import "quill/dist/quill.snow.css";
 
