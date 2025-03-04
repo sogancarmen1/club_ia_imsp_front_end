@@ -21,11 +21,11 @@ const DropdownUser = () => {
   useEffect(() => {
     const value = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/auth/me", {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`, {
           withCredentials: true,
         });
         const values = await axios.get(
-          `http://localhost:4000/user/by/${res.data.data.user.email}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/user/by/${res.data.data.user.email}`,
           {
             withCredentials: true,
           },
@@ -40,7 +40,7 @@ const DropdownUser = () => {
   const handleSubmit = async (e: any) => {
     try {
       await axios.post(
-        "http://localhost:4000/auth/logout",
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/logout`,
         {},
         {
           withCredentials: true,

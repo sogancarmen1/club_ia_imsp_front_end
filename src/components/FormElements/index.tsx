@@ -68,7 +68,7 @@ const FormElements = () => {
       setIsVisibleLoader(true);
       setIsVisible(false);
       const response = await axios.post(
-        `http://localhost:4000/articles`,
+        `${process.env.NEXT_PUBLIC_API_URL}/articles`,
         formData,
         {
           withCredentials: true,

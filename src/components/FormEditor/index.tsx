@@ -38,7 +38,7 @@ const FormEditor = () => {
       setIsVisibleLoader(true);
       setIsVisible(false);
       const response = await axios.post(
-        `http://localhost:4000/user`,
+        `${process.env.NEXT_PUBLIC_API_URL}/user`,
         {
           email: email,
         },

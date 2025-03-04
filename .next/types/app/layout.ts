@@ -1,4 +1,4 @@
-// File: /root/club_ia_imsp_frontend/src/app/layout.tsx
+// File: /home/anonyme/club_ia_imsp_front_end/src/app/layout.tsx
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

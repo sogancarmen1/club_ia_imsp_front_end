@@ -1,4 +1,4 @@
-// File: /root/club_ia_imsp_frontend/src/app/auth/signin/page.tsx
+// File: /home/anonyme/club_ia_imsp_front_end/src/app/auth/signin/page.tsx
 import * as entry from '../../../../../src/app/auth/signin/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

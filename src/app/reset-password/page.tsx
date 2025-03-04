@@ -49,7 +49,7 @@ const ActivateAccount: React.FC = () => {
     }
 
     try {
-      const response = await axios.put("http://localhost:4000/user/active", {
+      const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/user/active`, {
         token: token,
         password: newPassword,
       });

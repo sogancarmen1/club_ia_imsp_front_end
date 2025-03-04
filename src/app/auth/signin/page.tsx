@@ -43,7 +43,7 @@ const SignIn: React.FC = () => {
       setIsVisibleLoader(true);
       setIsVisible(false);
       response = await axios.post(
-        `http://localhost:4000/auth/login`,
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
         {
           email: email,
           password: password,

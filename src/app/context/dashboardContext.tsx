@@ -63,21 +63,21 @@ export const DashboardProvider = ({
     const fetchData = async () => {
       try {
         const responseSubscriber = await axios.get(
-          "http://localhost:4000/user",
+          `${process.env.NEXT_PUBLIC_API_URL}/user`,
           { withCredentials: true },
         );
         // console.log(responseSubscriber.data);
         setTotalSubscriber(responseSubscriber.data.data?.length);
 
         const responseProjects = await axios.get(
-          "http://localhost:4000/articles/project",
+          `${process.env.NEXT_PUBLIC_API_URL}/articles/project`,
           { withCredentials: true },
         );
         setProjectData(responseProjects.data.data);
         setTotalProjects(responseProjects.data.data.length);
 
         const responseArticles = await axios.get(
-          "http://localhost:4000/articles/article",
+          `${process.env.NEXT_PUBLIC_API_URL}/articles/article`,
           { withCredentials: true },
         );
         // console.log(responseArticles);
@@ -85,7 +85,7 @@ export const DashboardProvider = ({
         setTotalArticles(responseArticles.data.data.length);
 
         const responseMedias = await axios.get(
-          "http://localhost:4000/articles/medias",
+          `${process.env.NEXT_PUBLIC_API_URL}/articles/medias`,
           { withCredentials: true },
         );
         setTotalMedias(responseMedias.data.data);

@@ -15,12 +15,12 @@ const TableThree = () => {
   useEffect(() => {
     const value = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/auth/me", {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`, {
           withCredentials: true,
         });
         if (res.data.data.user.role == "admin") {
           const allEditors = await axios.get(
-            "http://localhost:4000/user/editor",
+            `${process.env.NEXT_PUBLIC_API_URL}/user/editor`,
             { withCredentials: true },
           );
           setAllEditor(allEditors.data?.data);

@@ -69,7 +69,7 @@ const FormLayout = () => {
     formData.append("contain", articleContain);
     try {
       const result = await axios.put(
-        `http://localhost:4000/articles/${data?.id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/articles/${data?.id}`,
         formData,
         {
           withCredentials: true,
@@ -88,7 +88,7 @@ const FormLayout = () => {
   const handleDelete = async (fileId: string) => {
     try {
       await axios.delete(
-        `http://localhost:4000/articles/${data?.id}/medias/${fileId}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/articles/${data?.id}/medias/${fileId}`,
         { withCredentials: true },
       );
       setFiles((prevFiles) => prevFiles.filter((file) => file.id !== fileId));

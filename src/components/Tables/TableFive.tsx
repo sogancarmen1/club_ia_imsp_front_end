@@ -15,7 +15,7 @@ const TableFive = () => {
 
   const handleSubmit = async (id: string) => {
     try {
-      await axios.delete(`http://localhost:4000/articles/${id}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/articles/${id}`, {
         withCredentials: true,
       });
     } catch (error) {}
@@ -23,7 +23,7 @@ const TableFive = () => {
   const handleSubmitSecond = async (id: string) => {
     try {
       const result = await axios.get(
-        `http://localhost:4000/articles/by/${id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/articles/by/${id}`,
         {
           withCredentials: true,
         },
