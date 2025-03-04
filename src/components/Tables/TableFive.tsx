@@ -4,20 +4,26 @@ import { eventBus } from "../../eventEmitter";
 import { Package } from "@/types/package";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 const TableFive = () => {
   const { articles } = useDashboard();
   const route = useRouter();
+  const [isArticleExist, setIsArticleExist] = useState<boolean>(true);
   const dashboardContext = useDashboard;
 
   const { setData, setIsAllowed } = dashboardContext();
+
+  useEffect(() => {
+    if(articles.length !== 0) setIsArticleExist(false);
+  }, [articles]);
 
   const handleSubmit = async (id: string) => {
     try {
       await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/articles/${id}`, {
         withCredentials: true,
       });
+      if(articles.length == 0) setIsArticleExist(true);
     } catch (error) {}
   };
   const handleSubmitSecond = async (id: string) => {
@@ -53,6 +59,7 @@ const TableFive = () => {
               </th>
             </tr>
           </thead>
+          <tbody>{isArticleExist && <tr><td className="min-w-[120px] p-4 font-sm">Aucun Article disponible</td></tr>}</tbody>
           <tbody>
             {articles
               ?.slice()

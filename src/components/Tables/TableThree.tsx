@@ -11,6 +11,7 @@ const TableThree = () => {
   // const token = cookies().get("Authorization")?.value;
   const [allEditor, setAllEditor] = useState<any>();
   const [role, setRole] = useState<any>();
+  const [isEditorExist, setIsEditorValue] = useState<boolean>(true);
 
   useEffect(() => {
     const value = async () => {
@@ -23,6 +24,7 @@ const TableThree = () => {
             `${process.env.NEXT_PUBLIC_API_URL}/user/editor`,
             { withCredentials: true },
           );
+          if(allEditors.data?.data.length !== 0) setIsEditorValue(false);
           setAllEditor(allEditors.data?.data);
           setRole(res.data.data.user.role);
         }
@@ -42,9 +44,12 @@ const TableThree = () => {
 
   const handleSubmit = async (id: string) => {
     try {
-      await axios.delete(`http://localhost:4000/user/${id}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/user/${id}`, {
         withCredentials: true,
       });
+      const index = allEditor.findIndex((item: any) => item.id == id);
+      if(index !== -1) allEditor.splice(index, 1);
+      if(allEditor.length == 0) setIsEditorValue(true);
     } catch (error) {}
   };
   return (
@@ -67,6 +72,9 @@ const TableThree = () => {
               </th>
             </tr>
           </thead>
+          <tbody>
+             {isEditorExist && <tr><td className="min-w-[120px] px-4 py-4 font-sm">Aucun éditeur disponible</td></tr>}
+          </tbody>
           <tbody>
             {allEditor
               ?.slice()

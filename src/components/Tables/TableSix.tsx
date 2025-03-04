@@ -2,15 +2,21 @@ import { useDashboard } from "@/app/context/dashboardContext";
 import { Package } from "@/types/package";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const TableSix = () => {
   const { projects, setData, setIsAllowed } = useDashboard();
   const route = useRouter();
+  const [isProjectExist, setIsProjectExist] = useState<boolean>(true);
+  useEffect(() => {
+    if(projects.length !== 0) setIsProjectExist(false);
+  }, [projects]);
   const handleSubmit = async (id: string) => {
     try {
       await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/articles/${id}`, {
         withCredentials: true,
       });
+      if(projects.length == 0) setIsProjectExist(true);
     } catch (error) {}
   };
   const handleSubmitSecond = async (id: any) => {
@@ -46,6 +52,7 @@ const TableSix = () => {
               </th>
             </tr>
           </thead>
+          <tbody>{isProjectExist && <tr><td className="min-w-[120px] px-4 py-4 font-sm">Aucun projet disponible</td></tr>}</tbody>
           <tbody>
             {projects
               ?.slice()
