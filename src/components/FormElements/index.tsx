@@ -83,6 +83,7 @@ const FormElements = () => {
       }
       toast.success(response.data.message);
     } catch (error: any) {
+      console.log(error);
       setIsVisibleLoader(false);
       setIsVisible(true);
       toast.error(error.response.data.message);

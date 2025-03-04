@@ -1,8 +1,5 @@
 {
-  "/auth/signin/page": "app/auth/signin/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
   "/admin/page": "app/admin/page.js",
-  "/forms/form-editor/page": "app/forms/form-editor/page.js",
-  "/reset-password/page": "app/reset-password/page.js",
-  "/page": "app/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
+  "/forms/form-elements/page": "app/forms/form-elements/page.js"
 }
