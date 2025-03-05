@@ -1,5 +1,6 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
+  "/forms/form-elements/page": "app/forms/form-elements/page.js",
   "/admin/page": "app/admin/page.js",
-  "/forms/form-elements/page": "app/forms/form-elements/page.js"
+  "/forms/form-layout/page": "app/forms/form-layout/page.js",
+  "/auth/signin/page": "app/auth/signin/page.js"
 }
