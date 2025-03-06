@@ -4,7 +4,6 @@ import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import FormLayout from "@/components/form-layout/page";
 
 const FormElementsPage = () => {
-
   return (
     <DefaultLayout>
       <FormLayout />

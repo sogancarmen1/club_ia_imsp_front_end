@@ -21,14 +21,11 @@ const DropdownUser = () => {
   useEffect(() => {
     const value = async () => {
       try {
-        const res = await axios.get(
-          "https://club-ia-imsp-backend.onrender.com/auth/me",
-          {
-            withCredentials: true,
-          },
-        );
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`, {
+          withCredentials: true,
+        });
         const values = await axios.get(
-          `https://club-ia-imsp-backend.onrender.com/user/by/${res.data.data.user.email}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/user/by/${res.data.data.user.email}`,
           {
             withCredentials: true,
           },
@@ -43,7 +40,7 @@ const DropdownUser = () => {
   const handleSubmit = async (e: any) => {
     try {
       await axios.post(
-        "https://club-ia-imsp-backend.onrender.com/auth/logout",
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/logout`,
         {},
         {
           withCredentials: true,

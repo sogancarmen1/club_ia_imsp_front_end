@@ -49,13 +49,10 @@ const ActivateAccount: React.FC = () => {
     }
 
     try {
-      const response = await axios.put(
-        "https://club-ia-imsp-backend.onrender.com/user/active",
-        {
-          token: token,
-          password: newPassword,
-        },
-      );
+      const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/user/active`, {
+        token: token,
+        password: newPassword,
+      });
       if (response.data.sucess) {
         toast.success(response.data.message);
         router.push("/auth/signin");
@@ -224,9 +221,18 @@ const ActivateAccount: React.FC = () => {
           <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
               {/* <span className="mb-1.5 block font-medium">Start for free</span> */}
-              <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
+              <h2 className="mb-2 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
                 Changer mot de passe
               </h2>
+              <small className="my-4 text-2xl text-sm">
+                Le mot de passe doit contenir :
+                <ul className="list-disc px-6">
+                 <li>au moins 15 caractères</li>
+                 <li>au moins un caractère spécial</li>
+                 <li>au moins une lettre majuscule</li>
+                 <li>au moins un chiffre</li>
+                </ul>
+              </small>
 
               <form onSubmit={handleSubmit}>
                 <div className="mb-4">

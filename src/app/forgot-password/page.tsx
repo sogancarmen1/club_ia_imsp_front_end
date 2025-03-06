@@ -37,7 +37,7 @@ const SignIn: React.FC = () => {
 
     try {
       const response = await axios.post(
-        "https://club-ia-imsp-backend.onrender.com/user/forgot-password",
+        `${process.env.NEXT_PUBLIC_API_URL}/user/forgot-password`,
         {
           email: email,
         },

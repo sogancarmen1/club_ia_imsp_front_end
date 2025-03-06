@@ -18,8 +18,11 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { BeatLoader } from "react-spinners";
 import Loader from "../common/Loader";
+import { redirect } from "next/navigation";
 
 const FormEditor = () => {
+  const what = localStorage.getItem("isAuthenticated");
+  if (!what) redirect("/auth/signin");
   const [email, setEmail] = useState("");
   const [isVisibleLoader, setIsVisibleLoader] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
@@ -35,7 +38,7 @@ const FormEditor = () => {
       setIsVisibleLoader(true);
       setIsVisible(false);
       const response = await axios.post(
-        `https://club-ia-imsp-backend.onrender.com/user`,
+        `${process.env.NEXT_PUBLIC_API_URL}/user`,
         {
           email: email,
         },

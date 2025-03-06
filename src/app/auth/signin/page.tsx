@@ -14,6 +14,7 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import Loader from "@/components/common/Loader";
 import { BeatLoader } from "react-spinners";
+import Head from "next/head";
 
 interface CustomJwtPayload extends JwtPayload {
   _id: string;
@@ -42,7 +43,7 @@ const SignIn: React.FC = () => {
       setIsVisibleLoader(true);
       setIsVisible(false);
       response = await axios.post(
-        `https://club-ia-imsp-backend.onrender.com/auth/login`,
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
         {
           email: email,
           password: password,
@@ -67,6 +68,7 @@ const SignIn: React.FC = () => {
         route.push("/admin");
       }
     } catch (err: any) {
+
       // console.log("Login error:", err);
       toast.error(err.response.data.message);
       setIsVisibleLoader(false);

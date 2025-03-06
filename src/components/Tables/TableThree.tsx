@@ -11,21 +11,20 @@ const TableThree = () => {
   // const token = cookies().get("Authorization")?.value;
   const [allEditor, setAllEditor] = useState<any>();
   const [role, setRole] = useState<any>();
+  const [isEditorExist, setIsEditorValue] = useState<boolean>(true);
 
   useEffect(() => {
     const value = async () => {
       try {
-        const res = await axios.get(
-          "https://club-ia-imsp-backend.onrender.com/auth/me",
-          {
-            withCredentials: true,
-          },
-        );
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`, {
+          withCredentials: true,
+        });
         if (res.data.data.user.role == "admin") {
           const allEditors = await axios.get(
-            "https://club-ia-imsp-backend.onrender.com/user/editor",
+            `${process.env.NEXT_PUBLIC_API_URL}/user/editor`,
             { withCredentials: true },
           );
+          if(allEditors.data?.data.length !== 0) setIsEditorValue(false);
           setAllEditor(allEditors.data?.data);
           setRole(res.data.data.user.role);
         }
@@ -35,23 +34,22 @@ const TableThree = () => {
     value();
   }, []);
 
-  const shouldRender = role == "admin";
+  // Condition pour déterminer si le composant doit être affiché
+  const shouldRender = role == "admin"; // Exemple de condition
+  // console.log(role);
+  // Si la condition n'est pas remplie, ne pas afficher le composant
   if (!shouldRender) {
-    return <p></p>;
+    return <p></p>; // Vous pouvez personnaliser ce message
   }
 
   const handleSubmit = async (id: string) => {
     try {
-      await axios.delete(
-        `https://club-ia-imsp-backend.onrender.com/user/${id}`,
-        {
-          withCredentials: true,
-        },
-      );
-      const index = allEditor.findIndex((item: any) => item.id === id);
-      if (index !== -1) {
-        allEditor.splice(index, 1);
-      }
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/user/${id}`, {
+        withCredentials: true,
+      });
+      const index = allEditor.findIndex((item: any) => item.id == id);
+      if(index !== -1) allEditor.splice(index, 1);
+      if(allEditor.length == 0) setIsEditorValue(true);
     } catch (error) {}
   };
   return (
@@ -75,6 +73,9 @@ const TableThree = () => {
             </tr>
           </thead>
 
+          <tbody>
+             {isEditorExist && <tr><td className="min-w-[120px] px-4 py-4 font-sm">Aucun éditeur disponible</td></tr>}
+          </tbody>
           <tbody>
             {allEditor
               ?.slice()
