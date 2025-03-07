@@ -9,7 +9,7 @@ import { useContext, useEffect, useState } from "react";
 const TableFive = () => {
   const { articles } = useDashboard();
   const route = useRouter();
-  const [isArticleExist, setIsArticleExist] = useState<boolean>(true);
+  const [isArticleExist, setIsArticleExist] = useState<boolean>(false);
   const dashboardContext = useDashboard;
   const [articlesTake, setArticlesTaked] = useState<any>();
   const [allArticle, setAllArticle] = useState<any>();
@@ -19,7 +19,7 @@ const TableFive = () => {
       try {
         const result = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/articles/article`,
                                    {withCredentials: true});
-        if(result.data?.data.length !== 0) setIsArticleExist(false);
+        if(result.data?.data.length == 0) setIsArticleExist(true);
         setAllArticle(result.data?.data);
       } catch(e) {}
     }
