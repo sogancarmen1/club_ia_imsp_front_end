@@ -1,14 +1,13 @@
 import { useDashboard } from "@/app/context/dashboardContext";
-import { Package } from "@/types/package";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const TableSix = () => {
   const { projects, setData, setIsAllowed } = useDashboard();
   const route = useRouter();
-  const [isProjectExist, setIsProjectExist] = useState<boolean>(false);
-  const [projectTake, setProjectTaked] = useState<any>();
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmit = async (id: string) => {
     try {
       await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/articles/${id}`, {
@@ -16,21 +15,18 @@ const TableSix = () => {
       });
     } catch (error) {}
   };
-  const handleSubmitSecond = async (id: any) => {
-    try {
-      const result = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/articles/by/${id}`,
-        {
-          withCredentials: true,
-        },
-      );
-      setData(result.data.data);
+  const handleSubmitSecond = (id: string) => {
+      setIsLoading(true);
+      const result = projects?.find(
+        (project: any) => project.id == Number(id)
+      )
+      setData(result);
       setIsAllowed(true);
       route.push("/forms/form-layout");
-    } catch (error) {}
   };
   return (
-    <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
+    <div className={isLoading ? "cursor-wait rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1" :
+                                "cursor-pointer rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1"}>
       <div className="max-w-full overflow-x-auto">
         <table className="w-full table-auto">
           <thead>
@@ -49,7 +45,7 @@ const TableSix = () => {
               </th>
             </tr>
           </thead>
-          <tbody>{isProjectExist && <tr><td className="min-w-[120px] px-4 py-4 font-sm">Aucun projet disponible</td></tr>}</tbody>
+          <tbody>{projects?.length == 0 ? (<tr><td className="min-w-[120px] px-4 py-4 font-sm">Aucun projet disponible</td></tr>) : ''}</tbody>
           <tbody>
             {projects
               ?.slice()

@@ -7,14 +7,13 @@ import React, { useEffect, useState } from "react";
 import Loader from "@/components/common/Loader";
 import { DashboardProvider } from "../app/context/dashboardContext";
 import { ToastContainer } from "react-toastify";
-import { sendResponse } from "next/dist/server/image-optimizer";
+import { useLanguage } from "./context/LanguageContext";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [loading, setLoading] = useState<boolean>(true);
 
   // const pathname = usePathname();
@@ -23,8 +22,10 @@ export default function RootLayout({
     setTimeout(() => setLoading(false), 1000);
   }, []);
 
+  const { lang } = useLanguage();
+
   return (
-    <html lang="en">
+    <html lang={lang}>
       <body suppressHydrationWarning={true}>
         <div>
           <ToastContainer position="top-right" />

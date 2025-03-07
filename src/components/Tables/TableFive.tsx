@@ -1,17 +1,13 @@
 import { useDashboard } from "@/app/context/dashboardContext";
-import FormLayout from "@/components/form-layout/page";
-import { eventBus } from "../../eventEmitter";
-import { Package } from "@/types/package";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 
 const TableFive = () => {
   const { articles } = useDashboard();
   const route = useRouter();
-  const [isArticleExist, setIsArticleExist] = useState<boolean>(false);
   const dashboardContext = useDashboard;
-  const [articlesTake, setArticlesTaked] = useState<any>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const { setData, setIsAllowed } = dashboardContext();
 
@@ -22,21 +18,18 @@ const TableFive = () => {
       });
     } catch (error) {}
   };
-  const handleSubmitSecond = async (id: string) => {
-    try {
-      const result = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/articles/by/${id}`,
-        {
-          withCredentials: true,
-        },
+  const handleSubmitSecond = (id: string) => {
+      setIsLoading(true);
+      const result = articles?.find(
+        (article: any) => article.id == Number(id)
       );
-      setData(result.data.data);
+      setData(result);
       setIsAllowed(true);
       route.push("/forms/form-layout");
-    } catch (error) {}
   };
   return (
-    <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
+    <div className={isLoading ? "cursor-wait rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1" :
+                                "cursor-pointer rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedard dark:bg-boxdark sm:px-7.5 xl:pb-1" }>
       <div className="max-w-full overflow-x-auto">
         <table className="w-full table-auto">
           <thead>
@@ -55,7 +48,7 @@ const TableFive = () => {
               </th>
             </tr>
           </thead>
-          <tbody>{isArticleExist && <tr><td className="min-w-[120px] p-4 font-sm">Aucun Article disponible</td></tr>}</tbody>
+          <tbody>{articles?.length == 0 ? (<tr><td className="min-w-[120px] px-4 py-4 font-sm">Aucun article disponible</td></tr>) : null}</tbody>
           <tbody>
             {articles
               ?.slice()

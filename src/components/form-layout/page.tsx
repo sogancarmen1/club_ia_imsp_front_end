@@ -1,9 +1,5 @@
 "use client";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
-
-import { Metadata } from "next";
-import DefaultLayout from "@/components/Layouts/DefaultLayout";
-import SelectGroupOne from "@/components/SelectGroup/SelectGroupOne";
 import { useEffect, useState } from "react";
 import { useDashboard } from "@/app/context/dashboardContext";
 import axios from "axios";
