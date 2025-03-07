@@ -9,9 +9,23 @@ import { useContext, useEffect, useState } from "react";
 const TableFive = () => {
   const { articles } = useDashboard();
   const route = useRouter();
-  const [isArticleExist, setIsArticleExist] = useState<boolean>(false);
+  const [isArticleExist, setIsArticleExist] = useState<boolean>(true);
   const dashboardContext = useDashboard;
   const [articlesTake, setArticlesTaked] = useState<any>();
+  const [allArticle, setAllArticle] = useState<any>();
+
+  useEffect(() => {
+    const value = async () => {
+      try {
+        const result = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/articles/article`,
+                                   {withCredentials: true});
+        setAllArticle(result.data?.data);
+        if(allArticle.length !== 0) setIsArticleExist(false);
+      } catch(e) {}
+    }
+
+    value();
+  }, []);
 
   const { setData, setIsAllowed } = dashboardContext();
 
@@ -57,7 +71,7 @@ const TableFive = () => {
           </thead>
           <tbody>{isArticleExist && <tr><td className="min-w-[120px] p-4 font-sm">Aucun Article disponible</td></tr>}</tbody>
           <tbody>
-            {articles
+            {allArticle
               ?.slice()
               .reverse()
               .map((value: any, key: any) => (
