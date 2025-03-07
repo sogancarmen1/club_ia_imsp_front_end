@@ -19,8 +19,8 @@ const TableFive = () => {
       try {
         const result = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/articles/article`,
                                    {withCredentials: true});
+        if(result.data?.data.length !== 0) setIsArticleExist(false);
         setAllArticle(result.data?.data);
-        if(allArticle.length !== 0) setIsArticleExist(false);
       } catch(e) {}
     }
 
