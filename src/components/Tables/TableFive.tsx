@@ -23,7 +23,7 @@ const TableFive = () => {
       await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/articles/${id}`, {
         withCredentials: true,
       });
-      if(articles.length == 0) setIsArticleExist(true);
+      if(articles?.length == 0) setIsArticleExist(true);
     } catch (error) {}
   };
   const handleSubmitSecond = async (id: string) => {
