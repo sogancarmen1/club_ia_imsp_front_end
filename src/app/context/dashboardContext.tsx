@@ -74,21 +74,21 @@ export const DashboardProvider = ({
           { withCredentials: true },
         );
         setProjectData(responseProjects.data.data);
-        setTotalProjects(responseProjects.data.data.length);
+        setTotalProjects(responseProjects.data.data?.length);
 
         const responseArticles = await axios.get(
           `${process.env.NEXT_PUBLIC_API_URL}/articles/article`,
           { withCredentials: true },
         );
         // console.log(responseArticles);
-        setArticleData(responseArticles.data.data);
-        setTotalArticles(responseArticles.data.data.length);
+        setArticleData(responseArticles.data?.data);
+        setTotalArticles(responseArticles.data.data?.length);
 
         const responseMedias = await axios.get(
           `${process.env.NEXT_PUBLIC_API_URL}/articles/medias`,
           { withCredentials: true },
         );
-        setTotalMedias(responseMedias.data.data);
+        setTotalMedias(responseMedias.data?.data);
 
         // if (role == "admin") {
         //   const allEditors = await axios.get(
