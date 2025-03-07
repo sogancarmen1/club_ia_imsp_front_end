@@ -34,7 +34,7 @@ const FormElements = () => {
 
   const { quill, quillRef } = useQuill();
   useEffect(() => {
-    if (quill) {
+    if (quill && quillRef.current) {
       quill.on("text-change", () => {
         setContain(quill.root.innerHTML);
       });
@@ -95,7 +95,7 @@ const FormElements = () => {
       <Breadcrumb pageName="Ajouter un article ou un projet" />
 
       <form onSubmit={handleSubmit}>
-        <div className="">
+        <div className="gap-9 sm:grid-cols-2">
           <div className="mb-10 flex flex-col gap-9">
             {/* <!-- Input Fields --> */}
             <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">

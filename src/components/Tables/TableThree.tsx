@@ -72,6 +72,7 @@ const TableThree = () => {
               </th>
             </tr>
           </thead>
+
           <tbody>
              {isEditorExist && <tr><td className="min-w-[120px] px-4 py-4 font-sm">Aucun éditeur disponible</td></tr>}
           </tbody>

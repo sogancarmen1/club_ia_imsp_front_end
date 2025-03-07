@@ -9,10 +9,9 @@ import { useDashboard } from "@/app/context/dashboardContext";
 import axios from "axios";
 import ImageGallery from "@/components/Showimages/page";
 import { toast } from "react-toastify";
-import { redirect } from "next/navigation";
-// import DOMPurify from "dompurify";
 import { useQuill } from "react-quilljs";
 import "quill/dist/quill.snow.css";
+import { redirect } from "next/navigation";
 
 // export const metadata: Metadata = {
 //   title: "Next.js Form Layout | TailAdmin - Next.js Dashboard Template",
@@ -30,8 +29,8 @@ const FormLayout = () => {
 
   const { quill, quillRef } = useQuill();
   useEffect(() => {
-    if (quill) {
-      quill.clipboard.dangerouslyPasteHTML(data?.contain);
+    if (quill && quillRef.current) {
+      quill.clipboard.dangerouslyPasteHTML(data.contain);
       quill.on("text-change", () => {
         setArticleContain(quill.root.innerHTML);
       });

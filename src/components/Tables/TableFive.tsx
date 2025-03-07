@@ -9,21 +9,17 @@ import { useContext, useEffect, useState } from "react";
 const TableFive = () => {
   const { articles } = useDashboard();
   const route = useRouter();
-  const [isArticleExist, setIsArticleExist] = useState<boolean>(true);
+  const [isArticleExist, setIsArticleExist] = useState<boolean>(false);
   const dashboardContext = useDashboard;
+  const [articlesTake, setArticlesTaked] = useState<any>();
 
   const { setData, setIsAllowed } = dashboardContext();
-
-  useEffect(() => {
-    if(articles.length !== 0) setIsArticleExist(false);
-  }, [articles]);
 
   const handleSubmit = async (id: string) => {
     try {
       await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/articles/${id}`, {
         withCredentials: true,
       });
-      if(articles.length == 0) setIsArticleExist(true);
     } catch (error) {}
   };
   const handleSubmitSecond = async (id: string) => {

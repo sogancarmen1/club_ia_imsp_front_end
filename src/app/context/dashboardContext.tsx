@@ -67,7 +67,7 @@ export const DashboardProvider = ({
           { withCredentials: true },
         );
         // console.log(responseSubscriber.data);
-        setTotalSubscriber(responseSubscriber.data.data?.length);
+        setTotalSubscriber(responseSubscriber.data.data.length);
 
         const responseProjects = await axios.get(
           `${process.env.NEXT_PUBLIC_API_URL}/articles/project`,
@@ -81,17 +81,18 @@ export const DashboardProvider = ({
           { withCredentials: true },
         );
         // console.log(responseArticles);
-        setArticleData(responseArticles.data.data);
+        setArticleData(responseArticles.data?.data);
         setTotalArticles(responseArticles.data.data.length);
 
         const responseMedias = await axios.get(
           `${process.env.NEXT_PUBLIC_API_URL}/articles/medias`,
           { withCredentials: true },
         );
-        setTotalMedias(responseMedias.data.data);
+        setTotalMedias(responseMedias.data?.data);
 
         // if (role == "admin") {
         //   const allEditors = await axios.get(
+        //     "https://club-ia-imsp-backend.onrender.com/user/editor",
         //     "http://localhost:4000/user/editor",
         //     { withCredentials: true },
         //   );

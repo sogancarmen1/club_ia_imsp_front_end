@@ -7,16 +7,13 @@ import { useEffect, useState } from "react";
 const TableSix = () => {
   const { projects, setData, setIsAllowed } = useDashboard();
   const route = useRouter();
-  const [isProjectExist, setIsProjectExist] = useState<boolean>(true);
-  useEffect(() => {
-    if(projects.length !== 0) setIsProjectExist(false);
-  }, [projects]);
+  const [isProjectExist, setIsProjectExist] = useState<boolean>(false);
+  const [projectTake, setProjectTaked] = useState<any>();
   const handleSubmit = async (id: string) => {
     try {
       await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/articles/${id}`, {
         withCredentials: true,
       });
-      if(projects.length == 0) setIsProjectExist(true);
     } catch (error) {}
   };
   const handleSubmitSecond = async (id: any) => {
