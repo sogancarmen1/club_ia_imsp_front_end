@@ -15,7 +15,7 @@ const TableFive = () => {
   const { setData, setIsAllowed } = dashboardContext();
 
   useEffect(() => {
-    if(articles?.length !== 0) setIsArticleExist(false);
+    if(articles.length !== 0) setIsArticleExist(false);
   }, [articles]);
 
   const handleSubmit = async (id: string) => {
@@ -23,7 +23,7 @@ const TableFive = () => {
       await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/articles/${id}`, {
         withCredentials: true,
       });
-      if(articles?.length == 0) setIsArticleExist(true);
+      if(articles.length == 0) setIsArticleExist(true);
     } catch (error) {}
   };
   const handleSubmitSecond = async (id: string) => {
