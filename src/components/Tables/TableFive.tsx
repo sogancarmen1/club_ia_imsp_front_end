@@ -15,7 +15,7 @@ const TableFive = () => {
   const { setData, setIsAllowed } = dashboardContext();
 
   useEffect(() => {
-    if(articles.length !== 0) setIsArticleExist(false);
+    if(articles?.length !== 0) setIsArticleExist(false);
   }, [articles]);
 
   const handleSubmit = async (id: string) => {
