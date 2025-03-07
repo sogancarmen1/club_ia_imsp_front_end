@@ -7,25 +7,13 @@ import { useEffect, useState } from "react";
 const TableSix = () => {
   const { projects, setData, setIsAllowed } = useDashboard();
   const route = useRouter();
-  const [isProjectExist, setIsProjectExist] = useState<boolean>(true);
+  const [isProjectExist, setIsProjectExist] = useState<boolean>(false);
   const [projectTake, setProjectTaked] = useState<any>();
-  useEffect(() => {
-    const fetchProject = async () => {
-      try {
-        const responseProject = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/articles/project`,
-                                               {withCredentials: true});
-        setProjectTaked(responseProject.data.data?.length);
-        if(projectTake !== 0) setIsProjectExist(false);
-      } catch(e) {}
-    }
-    fetchProject();
-  }, [projects]);
   const handleSubmit = async (id: string) => {
     try {
       await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/articles/${id}`, {
         withCredentials: true,
       });
-      if(projectTake.length == 0) setIsProjectExist(true);
     } catch (error) {}
   };
   const handleSubmitSecond = async (id: any) => {

@@ -9,28 +9,17 @@ import { useContext, useEffect, useState } from "react";
 const TableFive = () => {
   const { articles } = useDashboard();
   const route = useRouter();
-  const [isArticleExist, setIsArticleExist] = useState<boolean>(true);
+  const [isArticleExist, setIsArticleExist] = useState<boolean>(false);
   const dashboardContext = useDashboard;
   const [articlesTake, setArticlesTaked] = useState<any>();
 
   const { setData, setIsAllowed } = dashboardContext();
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      const responseArticles = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/articles/article`,
-                                              { withCredentials: true });
-      setArticlesTaked(responseArticles.data.data?.length);
-      if(articlesTake !== 0) setIsArticleExist(false);
-    }
-    fetchProjects();
-  }, [articles]);
 
   const handleSubmit = async (id: string) => {
     try {
       await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/articles/${id}`, {
         withCredentials: true,
       });
-      if(articlesTake?.length == 0) setIsArticleExist(true);
     } catch (error) {}
   };
   const handleSubmitSecond = async (id: string) => {
