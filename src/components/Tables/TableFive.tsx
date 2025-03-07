@@ -11,11 +11,18 @@ const TableFive = () => {
   const route = useRouter();
   const [isArticleExist, setIsArticleExist] = useState<boolean>(true);
   const dashboardContext = useDashboard;
+  const [articlesTake, setArticlesTaked] = useState<any>();
 
   const { setData, setIsAllowed } = dashboardContext();
 
   useEffect(() => {
-    if(articles.length !== 0) setIsArticleExist(false);
+    const fetchProjects = async () => {
+      const responseArticles = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/articles/article`,
+                                              { withCredentials: true });
+      setArticlesTaked(responseArticles.data.data?.length);
+      if(articlesTake !== 0) setIsArticleExist(false);
+    }
+    fetchProjects();
   }, [articles]);
 
   const handleSubmit = async (id: string) => {
@@ -23,7 +30,7 @@ const TableFive = () => {
       await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/articles/${id}`, {
         withCredentials: true,
       });
-      if(articles.length == 0) setIsArticleExist(true);
+      if(articlesTake?.length == 0) setIsArticleExist(true);
     } catch (error) {}
   };
   const handleSubmitSecond = async (id: string) => {
