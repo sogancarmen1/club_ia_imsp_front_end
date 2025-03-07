@@ -12,20 +12,6 @@ const TableFive = () => {
   const [isArticleExist, setIsArticleExist] = useState<boolean>(false);
   const dashboardContext = useDashboard;
   const [articlesTake, setArticlesTaked] = useState<any>();
-  const [allArticle, setAllArticle] = useState<any>();
-
-  useEffect(() => {
-    const value = async () => {
-      try {
-        const result = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/articles/article`,
-                                   {withCredentials: true});
-//        if(result.data?.data.length == 0) setIsArticleExist(true);
-        setAllArticle(result.data?.data);
-      } catch(e) {}
-    }
-
-    value();
-  }, []);
 
   const { setData, setIsAllowed } = dashboardContext();
 
@@ -71,7 +57,7 @@ const TableFive = () => {
           </thead>
           <tbody>{isArticleExist && <tr><td className="min-w-[120px] p-4 font-sm">Aucun Article disponible</td></tr>}</tbody>
           <tbody>
-            {allArticle
+            {articles
               ?.slice()
               .reverse()
               .map((value: any, key: any) => (
