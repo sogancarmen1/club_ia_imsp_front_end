@@ -7,8 +7,11 @@ import { toast } from "react-toastify";
 import { BeatLoader } from "react-spinners";
 import { useQuill } from "react-quilljs";
 import "quill/dist/quill.snow.css";
+import Editor from "../Editor";
+import { useDashboard } from "@/app/context/dashboardContext";
 
 const FormElements = () => {
+  const {content} = useDashboard();
   const what = localStorage.getItem("isAuthenticated");
   if (!what) redirect("/auth/signin");
   const [title, setTitle] = useState("");
@@ -49,7 +52,7 @@ const FormElements = () => {
 
     // Ajout des autres données
     formData.append("title", title);
-    formData.append("contain", contain);
+    formData.append("contain", content);
     formData.append("type", selectedOption);
     try {
       setIsVisibleLoader(true);
@@ -117,12 +120,12 @@ const FormElements = () => {
                       <label className="mb-3 block text-sm font-medium text-black dark:text-white">
                         Contenu
                       </label>
-                      <div
+                      <Editor />
+                      {/*<div
                         className="w-full rounded-xl border-stroke bg-transparent text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                        // style={{ width: 500, height: 300 }}
                       >
                         <div ref={quillRef} />
-                      </div>
+                        </div>*/}
                       {/* <p>Texte entré : {contain}</p> */}
                       {/* <textarea
                         value={contain}

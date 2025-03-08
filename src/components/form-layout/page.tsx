@@ -8,6 +8,10 @@ import { toast } from "react-toastify";
 import { useQuill } from "react-quilljs";
 import "quill/dist/quill.snow.css";
 import { redirect } from "next/navigation";
+import Editor from "../Editor";
+import Loadable from "next/dist/shared/lib/loadable.shared-runtime";
+import LoadState from "../LoadState";
+import { title } from "process";
 
 // export const metadata: Metadata = {
 //   title: "Next.js Form Layout | TailAdmin - Next.js Dashboard Template",
@@ -18,7 +22,7 @@ import { redirect } from "next/navigation";
 const FormLayout = () => {
   const what = localStorage.getItem("isAuthenticated");
   if (!what) redirect("/auth/signin");
-  const { data } = useDashboard();
+  const { data, content } = useDashboard();
   const [article, setArticle] = useState<any>(null);
   // const [files, setFile] = useState<FileList | null>(null);
   const [files, setFiles] = useState<any[]>(data?.files || []);
@@ -61,7 +65,7 @@ const FormLayout = () => {
 
     // Ajout des autres données
     if (articleTitle != data?.title) formData.append("title", articleTitle);
-    formData.append("contain", articleContain);
+      formData.append("contain", content);
     try {
       const result = await axios.put(
         `${process.env.NEXT_PUBLIC_API_URL}/articles/${data?.id}`,
@@ -124,12 +128,14 @@ const FormLayout = () => {
                   <label className="mb-3 block text-sm font-medium text-black dark:text-white">
                     Contenu
                   </label>
-                  <div
+                  <Editor>
+                    <LoadState title={articleContain} />
+                  </Editor>
+                  {/*<div
                     className="w-full rounded-xl border-stroke bg-transparent text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                    // style={{ width: 500, height: 300 }}
-                  >
+                   >
                     <div ref={quillRef} />
-                  </div>
+                    </div>*/}
                   {/* <textarea
                     rows={6}
                     value={articleContain}

@@ -26,6 +26,8 @@ interface DashboardContextProps {
   setValueDecoded: (value: any) => void;
   email: string;
   setEmails: (value: any) => void;
+  content: any | null;
+  setContent: (value: any) => void;
 }
 
 const DashboardContext = createContext<DashboardContextProps | undefined>(
@@ -37,6 +39,7 @@ export const DashboardProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const [content, setContent] = useState<any>();
   const [totalSubscriber, setTotalSubscriber] = useState<number | null>(null);
   const [allEditor, setEditorData] = useState<any | null>(null);
   const [totalProjects, setTotalProjects] = useState<number | null>(null);
@@ -128,6 +131,8 @@ export const DashboardProvider = ({
         setValueDecoded,
         email,
         setEmails,
+        content,
+        setContent
       }}
     >
       {children}
