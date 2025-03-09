@@ -2,6 +2,7 @@ import { useDashboard } from "@/app/context/dashboardContext";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { ClipLoader } from "react-spinners";
 
 const TableSix = () => {
   const { setData, setIsAllowed, setProjectData} = useDashboard();
@@ -9,6 +10,10 @@ const TableSix = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [projects, setProject] = useState<any>();
   const [isProjectExist, setIsProjectExist] = useState<boolean>(true);
+  const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [isLoadingVisible, setIsLoadingVisible] = useState<boolean>(false);
+  const [isVisibleDel, setIsVisibleDel] = useState<boolean>(true);
+  const [isLoadingVisibleDel, setIsLoadingVisibleDel] = useState<boolean>(false);
 
   useEffect(() => {
     const value = async () => {
@@ -30,7 +35,9 @@ const TableSix = () => {
       await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/articles/${id}`, {
         withCredentials: true,
       });
-      const updateProjects = projects.filter((item: any) => item.id !== id);
+      setIsVisibleDel(false);
+      setIsLoadingVisibleDel(true);
+     const updateProjects = projects.filter((item: any) => item.id !== id);
       setProject(updateProjects);
       if(projects.length == 0) setIsProjectExist(true);
     } catch (error) {}
@@ -40,6 +47,8 @@ const TableSix = () => {
       const result = projects?.find(
         (project: any) => project.id == Number(id)
       )
+      setIsLoadingVisible(true);
+      setIsVisible(false);
       setData(result);
       setIsAllowed(true);
       route.push("/forms/form-layout");
@@ -66,7 +75,10 @@ const TableSix = () => {
             </tr>
           </thead>
           <tbody>
-            {projects?.length == 0 ? (
+          {projects ? (<tr></tr>) : (<tr>
+              <td className="text-center" colSpan={4}><ClipLoader color="black" className="py-4" /></td>
+              </tr>)}
+             {projects?.length == 0 ? (
              <tr>
                {isProjectExist && <td colSpan={4} className="text-center py-4">Aucun projet disponible</td>}
             </tr>) :
@@ -92,7 +104,8 @@ const TableSix = () => {
                   </td>
                   <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                     <div className="flex items-center space-x-3.5">
-                      <button
+                    {isLoadingVisible && <ClipLoader color="black" className="text-center"/>}
+                      {isVisible && <button
                         onClick={() => {
                           handleSubmitSecond(value.id);
                         }}
@@ -115,8 +128,9 @@ const TableSix = () => {
                             fill=""
                           />
                         </svg>
-                      </button>
-                      <button
+                      </button>}
+                      {isLoadingVisibleDel && <ClipLoader color="black" className="text-center"/>}
+                      {isVisibleDel && <button
                         onClick={() => handleSubmit(value.id)}
                         className="hover:text-primary"
                       >
@@ -145,7 +159,7 @@ const TableSix = () => {
                             fill=""
                           />
                         </svg>
-                      </button>
+                      </button>}
                     </div>
                   </td>
                </tr>
