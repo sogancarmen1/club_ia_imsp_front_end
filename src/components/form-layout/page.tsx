@@ -65,7 +65,7 @@ const FormLayout = () => {
 
     // Ajout des autres données
     if (articleTitle != data?.title) formData.append("title", articleTitle);
-      formData.append("contain", content);
+      formData.append("contain", articleContain);
     try {
       const result = await axios.put(
         `${process.env.NEXT_PUBLIC_API_URL}/articles/${data?.id}`,
@@ -128,14 +128,14 @@ const FormLayout = () => {
                   <label className="mb-3 block text-sm font-medium text-black dark:text-white">
                     Contenu
                   </label>
-                  <Editor>
+                  {/*<Editor>
                     <LoadState title={articleContain} />
-                  </Editor>
-                  {/*<div
+                    </Editor>*/}
+                  <div
                     className="w-full rounded-xl border-stroke bg-transparent text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                    >
                     <div ref={quillRef} />
-                    </div>*/}
+                    </div>
                   {/* <textarea
                     rows={6}
                     value={articleContain}

@@ -1,10 +1,5 @@
 "use client";
-import { useDashboard } from "@/app/context/dashboardContext";
-import { Package } from "@/types/package";
-import axios from "axios";
-import Cookies from "js-cookie";
-
-import { cookies } from "next/headers";
+import axios, { all } from "axios";
 import { useEffect, useState } from "react";
 
 const TableThree = () => {
@@ -47,8 +42,8 @@ const TableThree = () => {
       await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/user/${id}`, {
         withCredentials: true,
       });
-      const index = allEditor.findIndex((item: any) => item.id == id);
-      if(index !== -1) allEditor.splice(index, 1);
+      const updatedEditor = allEditor.filter((item: any) => item.id !== id);
+      setAllEditor(updatedEditor);
       if(allEditor.length == 0) setIsEditorValue(true);
     } catch (error) {}
   };
@@ -72,12 +67,13 @@ const TableThree = () => {
               </th>
             </tr>
           </thead>
-
           <tbody>
-             {isEditorExist && <tr><td className="min-w-[120px] px-4 py-4 font-sm">Aucun éditeur disponible</td></tr>}
-          </tbody>
-          <tbody>
-            {allEditor
+            {allEditor?.length == 0 ? (
+             <tr>
+               {isEditorExist && <td colSpan={4} className="text-center py-4">Aucun editeur disponible</td>}
+             </tr>
+             ) :
+             (allEditor
               ?.slice()
               .reverse()
               .map((value: any, key: any) => (
@@ -133,7 +129,7 @@ const TableThree = () => {
                       </button>
                     </div>
                   </td>
-                </tr>
+                </tr>)
               ))}
           </tbody>
         </table>

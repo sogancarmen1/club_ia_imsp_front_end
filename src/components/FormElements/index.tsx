@@ -52,7 +52,7 @@ const FormElements = () => {
 
     // Ajout des autres données
     formData.append("title", title);
-    formData.append("contain", content);
+    formData.append("contain", contain);
     formData.append("type", selectedOption);
     try {
       setIsVisibleLoader(true);
@@ -120,12 +120,12 @@ const FormElements = () => {
                       <label className="mb-3 block text-sm font-medium text-black dark:text-white">
                         Contenu
                       </label>
-                      <Editor />
-                      {/*<div
+                      {/*<Editor />*/}
+                      <div
                         className="w-full rounded-xl border-stroke bg-transparent text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                       >
                         <div ref={quillRef} />
-                        </div>*/}
+                        </div>
                       {/* <p>Texte entré : {contain}</p> */}
                       {/* <textarea
                         value={contain}

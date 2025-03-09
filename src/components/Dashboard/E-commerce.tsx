@@ -1,18 +1,33 @@
 "use client";
-import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
-import ChatCard from "../Chat/ChatCard";
-import TableOne from "../Tables/TableOne";
 import CardDataStats from "../CardDataStats";
 import TableThree from "../Tables/TableThree";
-import axios from "axios";
 import TableFive from "../Tables/TableFive";
 import TableSix from "../Tables/TableSix";
 import { useDashboard } from "@/app/context/dashboardContext";
+import axios from "axios";
 
 const ECommerce: React.FC = () => {
-  const { totalSubscriber, totalProjects, totalArticles, totalMedias } =
-    useDashboard();
+  const {articles, projects} = useDashboard();
+  const [allMedias, setAllMedias] = useState<any>();
+  const [allSubscriber, setAllSubscriber] = useState<any>();
+  useEffect(() => {
+    const value = async () => {
+        try {
+         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/articles/medias`, {
+           withCredentials: true
+         });
+         setAllMedias(res.data?.data);
+
+         const resSubscriber = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
+           withCredentials: true
+         });
+          setAllSubscriber(resSubscriber.data?.data.length);
+      } catch(e) {}
+    }
+
+    value();
+  }, [articles, projects]);
 
   return (
     <>
@@ -21,7 +36,7 @@ const ECommerce: React.FC = () => {
         <CardDataStats
           title="Nombre total de projets"
           total={
-            totalProjects !== null ? totalProjects.toString() : "Chargement..."
+            projects !== null ? projects.length.toString() : "Chargement..."
           }
           rate=""
         >
@@ -46,7 +61,7 @@ const ECommerce: React.FC = () => {
         <CardDataStats
           title="Nombre total d'articles"
           total={
-            totalArticles !== null ? totalArticles.toString() : "Chargement..."
+            articles !== null ? articles.length.toString() : "Chargement..."
           }
           rate=""
         >
@@ -75,8 +90,8 @@ const ECommerce: React.FC = () => {
         <CardDataStats
           title="Nombre total de medias"
           total={
-            totalMedias !== null ? totalMedias.toString() : "Chargement..."
-          }
+            allMedias !== null ? allMedias : "Chargement..."
+         }
           rate=""
         >
           <svg
@@ -96,12 +111,12 @@ const ECommerce: React.FC = () => {
               fill=""
             />
           </svg>
-        </CardDataStats>
+          </CardDataStats>
         <CardDataStats
           title="Nombre d'abonnement"
           total={
-            totalSubscriber !== null
-              ? totalSubscriber?.toString()
+            allSubscriber !== null
+              ? allSubscriber
               : "Chargement..."
           }
           rate=""

@@ -1,18 +1,38 @@
 import { useDashboard } from "@/app/context/dashboardContext";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const TableSix = () => {
-  const { projects, setData, setIsAllowed } = useDashboard();
+  const { setData, setIsAllowed, setProjectData} = useDashboard();
   const route = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [projects, setProject] = useState<any>();
+  const [isProjectExist, setIsProjectExist] = useState<boolean>(true);
+
+  useEffect(() => {
+    const value = async () => {
+      try {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/articles/project`, {
+          withCredentials: true,
+        })
+        if(res.data?.data.length > 0) setIsProjectExist(false);
+        setProject(res.data?.data);
+        setProjectData(res.data?.data);
+      } catch(e) {}
+    };
+
+    value();
+  }, [projects]);
 
   const handleSubmit = async (id: string) => {
     try {
       await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/articles/${id}`, {
         withCredentials: true,
       });
+      const updateProjects = projects.filter((item: any) => item.id !== id);
+      setProject(updateProjects);
+      if(projects.length == 0) setIsProjectExist(true);
     } catch (error) {}
   };
   const handleSubmitSecond = (id: string) => {
@@ -45,9 +65,12 @@ const TableSix = () => {
               </th>
             </tr>
           </thead>
-          <tbody>{projects?.length == 0 ? (<tr><td className="min-w-[120px] px-4 py-4 font-sm">Aucun projet disponible</td></tr>) : ''}</tbody>
           <tbody>
-            {projects
+            {projects?.length == 0 ? (
+             <tr>
+               {isProjectExist && <td colSpan={4} className="text-center py-4">Aucun projet disponible</td>}
+            </tr>) :
+            (projects
               ?.slice()
               .reverse()
               .map((value: any, key: any) => (
@@ -56,7 +79,6 @@ const TableSix = () => {
                     <h5 className="font-medium text-black dark:text-white">
                       {value.title}
                     </h5>
-                    {/* <p className="text-sm">${packageItem.price}</p> */}
                   </td>
                   <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                     <p className="text-black dark:text-white">
@@ -126,8 +148,8 @@ const TableSix = () => {
                       </button>
                     </div>
                   </td>
-                </tr>
-              ))}
+               </tr>
+             )))}
           </tbody>
         </table>
       </div>

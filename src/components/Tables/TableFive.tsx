@@ -1,21 +1,41 @@
 import { useDashboard } from "@/app/context/dashboardContext";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const TableFive = () => {
-  const { articles } = useDashboard();
+  const { setArticleData, setData, setIsAllowed } = useDashboard();
   const route = useRouter();
-  const dashboardContext = useDashboard;
+//swapfile  const dashboardContext = useDashboard;
   const [isLoading, setIsLoading] = useState(false);
+  const [articles, setArticles] = useState<any[]>([]);
+  const [isArticleExist, setIsArticleExist] = useState<boolean>(true);
 
-  const { setData, setIsAllowed } = dashboardContext();
+//  const { setData, setIsAllowed } = dashboardContext();
+
+  useEffect(() => {
+    const value = async () => {
+      try {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/articles/article`, {
+          withCredentials: true,
+        });
+        if(res.data?.data.length > 0) setIsArticleExist(false);
+        setArticles(res.data?.data);
+        setArticleData(res.data?.data);
+      } catch(e) {}
+    };
+
+    value();
+  }, [articles]);
 
   const handleSubmit = async (id: string) => {
     try {
       await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/articles/${id}`, {
         withCredentials: true,
       });
+      const updatedArticles = articles.filter((item: any) => item.id !== id);
+      setArticles(updatedArticles);
+      if(articles.length == 0) setIsArticleExist(true);
     } catch (error) {}
   };
   const handleSubmitSecond = (id: string) => {
@@ -29,7 +49,7 @@ const TableFive = () => {
   };
   return (
     <div className={isLoading ? "cursor-wait rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1" :
-                                "cursor-pointer rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedard dark:bg-boxdark sm:px-7.5 xl:pb-1" }>
+                                "cursor-pointer rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1" }>
       <div className="max-w-full overflow-x-auto">
         <table className="w-full table-auto">
           <thead>
@@ -48,9 +68,12 @@ const TableFive = () => {
               </th>
             </tr>
           </thead>
-          <tbody>{articles?.length == 0 ? (<tr><td className="min-w-[120px] px-4 py-4 font-sm">Aucun article disponible</td></tr>) : null}</tbody>
           <tbody>
-            {articles
+            {articles?.length == 0 ? (
+              <tr>
+                {isArticleExist && <td colSpan={4} className="text-center py-4">Aucun article disponible</td>}
+              </tr>
+            ) : (articles
               ?.slice()
               .reverse()
               .map((value: any, key: any) => (
@@ -129,7 +152,7 @@ const TableFive = () => {
                       </button>
                     </div>
                   </td>
-                </tr>
+                  </tr>)
               ))}
           </tbody>
         </table>
