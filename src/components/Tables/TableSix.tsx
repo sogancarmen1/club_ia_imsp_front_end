@@ -21,14 +21,18 @@ const TableSix = () => {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/articles/project`, {
           withCredentials: true,
         })
-        if(res.data?.data.length > 0) setIsProjectExist(false);
+        if(res.data?.data.length === 0) {
+          setIsProjectExist(true);
+        } else {
+          setIsProjectExist(false);
+        }
         setProject(res.data?.data);
         setProjectData(res.data?.data);
       } catch(e) {}
     };
 
     value();
-  }, [projects]);
+  }, []);
 
   const handleSubmit = async (id: string) => {
     try {
@@ -39,12 +43,12 @@ const TableSix = () => {
       setIsLoadingVisibleDel(true);
      const updateProjects = projects.filter((item: any) => item.id !== id);
       setProject(updateProjects);
-      if(projects.length == 0) setIsProjectExist(true);
+      setIsProjectExist(updateProjects.length === 0);
     } catch (error) {}
   };
   const handleSubmitSecond = (id: string) => {
       setIsLoading(true);
-      const result = projects?.find(
+      const result = projects.find(
         (project: any) => project.id == Number(id)
       )
       setIsLoadingVisible(true);
