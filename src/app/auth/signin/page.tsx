@@ -1,26 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
-import { Metadata } from "next";
-import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { useDashboard } from "@/app/context/dashboardContext";
-import { jwtDecode, JwtPayload } from "jwt-decode";
-import Cookies from "js-cookie";
 import { toast } from "react-toastify";
-import Loader from "@/components/common/Loader";
 import { BeatLoader } from "react-spinners";
-import Head from "next/head";
-
-interface CustomJwtPayload extends JwtPayload {
-  _id: string;
-  _role: string;
-}
-
 // export function Login() {}
 
 // export const metadata: Metadata = {
@@ -33,9 +19,7 @@ const SignIn: React.FC = () => {
   const [password, setPassword] = useState("");
   const [isVisibleLoader, setIsVisibleLoader] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const [error, setError] = useState("");
   const route = useRouter();
-  const { setToken, setRole, setValueDecoded, setEmails } = useDashboard();
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     let response: any;

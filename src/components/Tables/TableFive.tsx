@@ -2,6 +2,7 @@ import { useDashboard } from "@/app/context/dashboardContext";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { ClipLoader } from "react-spinners";
 
 const TableFive = () => {
   const { setArticleData, setData, setIsAllowed } = useDashboard();
@@ -10,6 +11,10 @@ const TableFive = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [articles, setArticles] = useState<any[]>([]);
   const [isArticleExist, setIsArticleExist] = useState<boolean>(true);
+  const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [isLoadingVisible, setIsLoadingVisible] = useState<boolean>(false);
+  const [isVisibleDel, setIsVisibleDel] = useState<boolean>(true);
+  const [isLoadingVisibleDel, setIsLoadingVisibleDel] = useState<boolean>(false);
 
 //  const { setData, setIsAllowed } = dashboardContext();
 
@@ -33,6 +38,8 @@ const TableFive = () => {
       await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/articles/${id}`, {
         withCredentials: true,
       });
+      setIsVisibleDel(false);
+      setIsLoadingVisibleDel(true);
       const updatedArticles = articles.filter((item: any) => item.id !== id);
       setArticles(updatedArticles);
       if(articles.length == 0) setIsArticleExist(true);
@@ -45,6 +52,8 @@ const TableFive = () => {
       );
       setData(result);
       setIsAllowed(true);
+      setIsLoadingVisible(true);
+      setIsVisible(false);
       route.push("/forms/form-layout");
   };
   return (
@@ -69,6 +78,9 @@ const TableFive = () => {
             </tr>
           </thead>
           <tbody>
+            {articles ? (<tr></tr>) : (<tr>
+              <td className="text-center" colSpan={4}><ClipLoader color="black" className="py-4" /></td>
+              </tr>)}
             {articles?.length == 0 ? (
               <tr>
                 {isArticleExist && <td colSpan={4} className="text-center py-4">Aucun article disponible</td>}
@@ -96,7 +108,8 @@ const TableFive = () => {
                   </td>
                   <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                     <div className="flex items-center space-x-3.5">
-                      <button
+                    {isLoadingVisible && <ClipLoader color="black" className="text-center"/>}
+                      {isVisible && <button
                         onClick={() => {
                           handleSubmitSecond(value.id);
                         }}
@@ -119,8 +132,9 @@ const TableFive = () => {
                             fill=""
                           />
                         </svg>
-                      </button>
-                      <button
+                        </button>}
+                      {isLoadingVisibleDel && <ClipLoader color="black" className="text-center"/>}
+                      {isVisibleDel && <button
                         onClick={() => handleSubmit(value.id)}
                         className="hover:text-primary"
                       >
@@ -149,7 +163,7 @@ const TableFive = () => {
                             fill=""
                           />
                         </svg>
-                      </button>
+                        </button>}
                     </div>
                   </td>
                   </tr>)
